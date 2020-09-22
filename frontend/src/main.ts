@@ -1,11 +1,18 @@
-import "es6-promise/auto";
-import "vue-material/dist/theme/default.css";
-import "vue-material/dist/vue-material.min.css";
+import './registerServiceWorker';
+import 'vue-material/dist/theme/default.css';
+import 'vue-material/dist/vue-material.min.css';
 
-import { createApp } from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import VueMaterial from 'vue-material';
 
-import App from "./App.vue";
+import App from './App.vue';
+import router from './router';
+import store from './store';
 
-Vue.use(Vuex);
-createApp(App).mount("#app");
+Vue.config.productionTip = false;
+Vue.use(VueMaterial);
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
