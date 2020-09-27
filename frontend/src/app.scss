@@ -1,14 +1,14 @@
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
+@import '~vue-material/dist/theme/engine'; // Import the theme engine
 
-@import "./variables.scss";
+@import './variables.scss';
 @include md-register-theme(
-  "default",
-  (
-    primary: $primary,
-    md-theme-default-primary: $primary,
-    accent: #096816,
-    theme: light // This can be dark or light,,,,,,,,,,,,,,,,,,
-  )
+    'default',
+    (
+        primary: $primary,
+        md-theme-default-primary: $primary,
+        accent: #096816,
+        theme: light // This can be dark or light,,,,,,,,,,,,,,,,,,
+    )
 );
 
-@import "~vue-material/dist/theme/all";
+@import '~vue-material/dist/theme/all';

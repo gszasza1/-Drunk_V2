@@ -1,0 +1,52 @@
+<div class="init">
+    <div><p>Drunk</p></div>
+    <div>
+        <form novalidate class="md-layout" @submit.prevent="validateUser">
+            <md-card class="md-layout-item ">
+                <md-card-header>
+                    <div class="md-title">Bejelentkezés</div>
+                </md-card-header>
+                <md-card-content>
+                    <div class="md-layout md-gutter">
+                        <div class="md-layout-item md-small-size-100">
+                            <md-field :class="getValidationClass('username')">
+                                <label for="username">Felhasználó név</label>
+                                <md-input
+                                    required
+                                    name="username"
+                                    id="username"
+                                    v-model="form.username"
+                                />
+                                <span
+                                    v-if="!$v.form.username.required"
+                                    class="md-error"
+                                    >Kötelező mező</span
+                                >
+                            </md-field>
+                            <md-field :class="getValidationClass('password')">
+                                <label for="password">Jelszó</label>
+                                <md-input
+                                    required
+                                    name="password"
+                                    id="password"
+                                    v-model="form.password"
+                                />
+                                <span
+                                    v-if="!$v.form.password.required"
+                                    class="md-error"
+                                    >Kötelező mező</span
+                                >
+                            </md-field>
+                        </div>
+                    </div>
+                    <md-button to="/register" class="md-primary"
+                        >Regisztráció</md-button
+                    >
+                    <md-button type="submit" class="md-raised md-primary"
+                        >Bejelentkezés</md-button
+                    >
+                </md-card-content>
+            </md-card>
+        </form>
+    </div>
+</div>
