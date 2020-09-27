@@ -1,14 +1,14 @@
 @import "~vue-material/dist/theme/engine"; // Import the theme engine
 
+@import "./variables.scss";
 @include md-register-theme(
   "default",
   (
-    primary: #ff953f,
-    // The primary color of your application
-      accent: #096816,
-    // The accent or secondary color
-      theme: dark // This can be dark or light,,,,,,,
+    primary: $primary,
+    md-theme-default-primary: $primary,
+    accent: #096816,
+    theme: light // This can be dark or light,,,,,,,,,,,,,,,,,,
   )
 );
-@import "~vue-material/dist/components/MdButton/theme";
+
 @import "~vue-material/dist/theme/all";
