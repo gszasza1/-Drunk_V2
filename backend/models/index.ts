@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
 import dbConfig from '../database/connect';
-import { tutorial } from './tutorial';
+import { Member } from './registerMember';
 
 mongoose.Promise = global.Promise;
 
 export default {
   mongoose,
   url: dbConfig.url,
-  tutorial,
+  Member,
 };

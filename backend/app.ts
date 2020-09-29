@@ -9,7 +9,6 @@ import swaggerUi from 'swagger-ui-express';
 
 import database from './models';
 import indexRouter from './routes';
-import usersRouter from './routes/users';
 
 var debug = require("debug")("backend:server");
 
@@ -25,9 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors(corsOptions));
-
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
