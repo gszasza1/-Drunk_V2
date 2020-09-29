@@ -1,19 +1,18 @@
-export default (mongoose) => {
-  var schema = mongoose.Schema(
-    {
-      title: String,
-      description: String,
-      published: Boolean,
-    },
-    { timestamps: true }
-  );
+import mongoose from 'mongoose';
 
-  schema.method("toJSON", function () {
-    const { __v, _id, ...object } = this.toObject();
-    object.id = _id;
-    return object;
-  });
+export const tutorialScheme = new mongoose.Schema(
+  {
+    title: String,
+    description: String,
+    published: Boolean,
+  },
+  { timestamps: true }
+);
 
-  const Tutorial = mongoose.model("tutorial", schema);
-  return Tutorial;
-};
+tutorialScheme.method("toJSON", function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+  return object;
+});
+
+export const tutorial = mongoose.model("tutorial", tutorialScheme);
