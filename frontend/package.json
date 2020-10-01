@@ -10,6 +10,7 @@
         "format": "./node_modules/.bin/prettier --write \"src/**/*.{js,ts,html,md,scss,css,tsx,jsx,vue}\""
     },
     "dependencies": {
+        "axios": "^0.20.0",
         "core-js": "^3.6.5",
         "register-service-worker": "^1.7.1",
         "vue": "^2.6.11",
