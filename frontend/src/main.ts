@@ -2,6 +2,7 @@ import './app.scss';
 import './registerServiceWorker';
 import 'vue-material/dist/vue-material.min.css';
 
+import Axios from 'axios';
 import Vue from 'vue';
 import VueMaterial from 'vue-material';
 import Vuelidate from 'vuelidate';
@@ -13,6 +14,13 @@ import store from './store';
 Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 Vue.use(VueMaterial);
+Axios.defaults.baseURL = 'http://localhost:3000/api';
+Axios.defaults.headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+    'Content-Type': 'application/json'
+};
+
 // eslint-disable-next-line
 const AltVue = Vue as any;
 AltVue.material = {

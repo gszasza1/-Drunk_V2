@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 export const registerMemberScheme = new mongoose.Schema(
   {
-    name: { type: String, minlength: 6, required: true, unique: true },
+    username: { type: String, minlength: 6, required: true, unique: true },
     password: { type: String, minlength: 6, required: true },
     type: { type: Number, required: true },
   },
@@ -10,7 +10,7 @@ export const registerMemberScheme = new mongoose.Schema(
 );
 
 export interface Member {
-  name: string;
+  username: string;
   password: string;
 }
 export enum UserType {

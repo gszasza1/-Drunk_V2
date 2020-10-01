@@ -31,8 +31,9 @@
             </md-field>
         </div>
     </div>
-    >
+
     <md-button type="submit" class="md-raised md-primary"
-        >Regisztráció</md-button
+        >{{$store.state.member.params.isRequesting?'Töltés':
+        'Regisztráció'}}</md-button
     >
 </form>

@@ -8,25 +8,25 @@ export const validateMemberInput = (
   res: Response,
   next: NextFunction
 ) => {
-  const { name, password }: Member = req.body;
+  const { username, password }: Member = req.body;
   if (
     !password ||
-    !name ||
+    !username ||
     typeof password !== "string" ||
-    typeof name !== "string"
+    typeof username !== "string"
   ) {
     res.status(StatusCodes.BAD_REQUEST).send({ error: "Hibás formátum" });
   } else if (password.length < 6) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .send({ error: "Jelszónak 6 karakternél hosszabbnak kell lennie." });
-  } else if (name.length < 6) {
+  } else if (username.length < 6) {
     res.status(StatusCodes.BAD_REQUEST).send({
       error: "Felhasználónévnek 6 karakternél hosszabbnak kell lennie.",
     });
   } else {
-    Member.find({ name: req.body.name }).then((x) => {
-      if (x) {
+    Member.find({ username: req.body.username }).then((x) => {
+      if (x.length > 0) {
         res
           .status(StatusCodes.BAD_REQUEST)
           .send({ error: "Foglalt felhasználónév" });
