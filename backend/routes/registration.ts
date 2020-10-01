@@ -1,11 +1,9 @@
 import express from 'express';
 
-import { validateMemberInput } from '../middlewares/registration';
-import { createMember } from '../middlewares/registration/createMember';
-import { hashPassword } from '../middlewares/registration/hashPassword';
+import { createFirm, createMember, hashPassword, validateMemberInput } from '../middlewares/registration';
 
 var router = express.Router();
 
-/* GET home page. */
 router.post("/member", validateMemberInput, hashPassword, createMember);
+router.post("/firm", validateMemberInput, hashPassword, createFirm);
 export default router;
