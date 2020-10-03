@@ -8,12 +8,15 @@ import VueMaterial from 'vue-material';
 import Vuelidate from 'vuelidate';
 
 import App from './App.vue';
+import { ValidatorDirective } from './directives';
 import router from './router';
 import store from './store';
 
 Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 Vue.use(VueMaterial);
+Vue.directive('validation', ValidatorDirective);
+
 Axios.defaults.baseURL = 'http://localhost:3000/api';
 Axios.defaults.headers = {
     'Access-Control-Allow-Origin': '*',

@@ -36,7 +36,7 @@ export default new Vuex.Store({
             state.commit('setMemberRequest', payload);
 
             Axios.post('/registration/member', payload, {})
-                .then(x => {
+                .then(() => {
                     state.commit('setMemberResponse');
                 })
                 .catch(x => {

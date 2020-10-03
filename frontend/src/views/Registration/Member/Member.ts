@@ -1,7 +1,7 @@
 import Component from 'vue-class-component';
 import { mixins } from 'vue-class-component/lib/util';
 import { validationMixin } from 'vuelidate';
-import { required } from 'vuelidate/lib/validators';
+import { minLength, required } from 'vuelidate/lib/validators';
 
 @Component({
     name: 'Member',
@@ -14,10 +14,12 @@ import { required } from 'vuelidate/lib/validators';
     validations: {
         form: {
             username: {
-                required
+                required,
+                minLength: minLength(6)
             },
             password: {
-                required
+                required,
+                minLength: minLength(6)
             }
         }
     },

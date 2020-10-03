@@ -2,7 +2,6 @@
     <md-card-header>
         <div class="md-title">Regisztráció</div>
     </md-card-header>
-
     <div class="md-layout md-gutter">
         <div class="md-layout-item md-small-size-100">
             <md-field :class="getValidationClass('username')">
@@ -12,10 +11,8 @@
                     name="username"
                     id="username"
                     v-model="form.username"
+                    v-validation="$v.form.username"
                 />
-                <span v-if="!$v.form.username.required" class="md-error"
-                    >Kötelező mező</span
-                >
             </md-field>
             <md-field :class="getValidationClass('password')">
                 <label for="password">Jelszó</label>
@@ -24,14 +21,11 @@
                     name="password"
                     id="password"
                     v-model="form.password"
+                    v-validation="$v.form.password"
                 />
-                <span v-if="!$v.form.password.required" class="md-error"
-                    >Kötelező mező</span
-                >
             </md-field>
         </div>
     </div>
-
     <md-button type="submit" class="md-raised md-primary"
         >{{$store.state.member.params.isRequesting?'Töltés':
         'Regisztráció'}}</md-button
