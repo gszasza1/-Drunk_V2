@@ -33,6 +33,9 @@ import { required } from 'vuelidate/lib/validators';
         },
         validateUser() {
             this.$v.$touch();
+            if (!this.$v.$invalid) {
+                this.$store.dispatch('setLoginRequest', this.$data.form);
+            }
         }
     }
 })

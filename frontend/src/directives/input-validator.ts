@@ -6,7 +6,7 @@ const validatorError = {
 };
 
 export const ValidatorDirective: DirectiveOptions = {
-    update: function(el, binding, vnode) {
+    update: function(el, binding) {
         if (binding.value) {
             const validation = Object.keys(binding.value)
                 .filter(x => !x.startsWith('$'))

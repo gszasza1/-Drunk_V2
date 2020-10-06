@@ -59,7 +59,7 @@ import Component from 'vue-class-component';
     },
     created() {
         this.$store.subscribeAction({
-            after: (action, state) => {
+            after: action => {
                 if (action.type === 'openSnackbar') {
                     this.$data.show = true;
                 }
