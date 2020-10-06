@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { Module } from 'vuex';
 
 import { State } from '.';
@@ -24,10 +25,17 @@ export const login: Module<LoginState, State> = {
 
             state.params.isError = false;
         },
-        setLoginResponse(state) {
+        setLoginResponse(state, payload) {
             state.params.isRequesting = false;
-
+            state.response = {
+                ...payload,
+                decodedToken: jwtDecode(payload.accessToken)
+            };
             state.params.isError = false;
+            Axios.defaults.headers = {
+                ...Axios.defaults.headers,
+                Authentication: payload.accessToken
+            };
         },
         setLoginError(state, payload) {
             state.error = payload;
@@ -40,8 +48,8 @@ export const login: Module<LoginState, State> = {
             state.commit('setLoginRequest', payload);
 
             return Axios.post('/login', payload, {})
-                .then(() => {
-                    state.commit('setLoginResponse');
+                .then(response => {
+                    state.commit('setLoginResponse', response.data);
                 })
                 .catch(error => {
                     state.commit('setLoginError', error);
