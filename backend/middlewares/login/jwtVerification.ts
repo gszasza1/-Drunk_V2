@@ -18,7 +18,7 @@ export const authenticateJWT = (
       if (err) {
         return res.sendStatus(StatusCodes.FORBIDDEN);
       }
-
+      //TODO továbbadni usert
       console.log(username);
       next();
     });
