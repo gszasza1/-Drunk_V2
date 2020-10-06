@@ -7,7 +7,6 @@ const validatorError = {
 
 export const ValidatorDirective: DirectiveOptions = {
     update: function(el, binding, vnode) {
-        console.log(binding.value);
         if (binding.value) {
             const validation = Object.keys(binding.value)
                 .filter(x => !x.startsWith('$'))
@@ -17,7 +16,7 @@ export const ValidatorDirective: DirectiveOptions = {
             if (element) {
                 el.parentNode?.removeChild(element);
             }
-            if (validation.length > 0) {
+            if (validation.length > 0 && validatorError[validation[0]]) {
                 const sajt = document.createElement('span');
                 sajt.className = 'md-error';
                 sajt.id = 'error-' + el.id;

@@ -4,14 +4,16 @@ export const registerMemberScheme = new mongoose.Schema(
   {
     username: { type: String, minlength: 6, required: true, unique: true },
     password: { type: String, minlength: 6, required: true },
+    fullName: { type: String },
     type: { type: Number, required: true },
   },
   { timestamps: true }
 );
 
-export interface Member {
+export interface User {
   username: string;
   password: string;
+  fullName?: string;
 }
 export enum UserType {
   Member,
@@ -24,4 +26,4 @@ registerMemberScheme.method("toJSON", function () {
   return object;
 });
 
-export const Member = mongoose.model("member", registerMemberScheme);
+export const User = mongoose.model("user", registerMemberScheme);

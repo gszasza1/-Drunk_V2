@@ -24,10 +24,17 @@
                     v-validation="$v.form.password"
                 />
             </md-field>
+            <md-field>
+                <label for="fullName">Teljes név</label>
+                <md-input
+                    name="fullName"
+                    id="fullName"
+                    v-model="form.fullName"
+                />
+            </md-field>
         </div>
     </div>
     <md-button type="submit" class="md-raised md-primary"
-        >{{$store.state.member.params.isRequesting?'Töltés':
-        'Regisztráció'}}</md-button
+        >{{getMemberRequesting?'Töltés': 'Regisztráció'}}</md-button
     >
 </form>

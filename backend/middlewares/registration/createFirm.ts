@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { Member, UserType } from '../../models/registerMember';
+import { User, UserType } from '../../models/registerUser';
 
 export const createFirm = (req: Request, res: Response, next: NextFunction) => {
-  Member.create({ ...req.body, type: UserType.Firm })
+  User.create({ ...req.body, type: UserType.Firm })
     .then((x) => {
       res.status(StatusCodes.OK).send("Sikeres regisztráció");
     })

@@ -24,6 +24,18 @@ Axios.defaults.headers = {
     'Content-Type': 'application/json'
 };
 
+Axios.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if (error.response.status === 400) {
+            store.dispatch('openSnackbar', error.response.data);
+        }
+        return error;
+    }
+);
+
 // eslint-disable-next-line
 const AltVue = Vue as any;
 AltVue.material = {

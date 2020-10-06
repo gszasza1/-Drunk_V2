@@ -8,9 +8,15 @@ import { minLength, required } from 'vuelidate/lib/validators';
     data: () => ({
         form: {
             username: null,
-            password: null
+            password: null,
+            fullName: null
         }
     }),
+    computed: {
+        getMemberRequesting() {
+            return this.$store.getters.getMemberRequesting;
+        }
+    },
     validations: {
         form: {
             username: {

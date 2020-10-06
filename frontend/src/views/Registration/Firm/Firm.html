@@ -12,10 +12,8 @@
                     name="username"
                     id="username"
                     v-model="form.username"
+                    v-validation="$v.form.fullName"
                 />
-                <span v-if="!$v.form.username.required" class="md-error"
-                    >Kötelező mező</span
-                >
             </md-field>
             <md-field :class="getValidationClass('password')">
                 <label for="password">Jelszó</label>
@@ -24,22 +22,18 @@
                     name="password"
                     id="password"
                     v-model="form.password"
+                    v-validation="$v.form.fullName"
                 />
-                <span v-if="!$v.form.password.required" class="md-error"
-                    >Kötelező mező</span
-                >
             </md-field>
-            <md-field :class="getValidationClass('firmName')">
-                <label for="firmName">Cég név</label>
+            <md-field :class="getValidationClass('fullName')">
+                <label for="fullName">Cég név</label>
                 <md-input
                     required
-                    name="firmName"
-                    id="firmName"
-                    v-model="form.firmName"
+                    name="fullName"
+                    id="fullName"
+                    v-model="form.fullName"
+                    v-validation="$v.form.fullName"
                 />
-                <span v-if="!$v.form.firmName.required" class="md-error"
-                    >Kötelező mező</span
-                >
             </md-field>
         </div>
     </div>

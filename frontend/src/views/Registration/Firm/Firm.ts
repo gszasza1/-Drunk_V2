@@ -9,7 +9,7 @@ import { required } from 'vuelidate/lib/validators';
         form: {
             username: null,
             password: null,
-            firmName: null
+            fullName: null
         }
     }),
     validations: {
@@ -20,7 +20,7 @@ import { required } from 'vuelidate/lib/validators';
             password: {
                 required
             },
-            firmName: {
+            fullName: {
                 required
             }
         }
@@ -37,7 +37,6 @@ import { required } from 'vuelidate/lib/validators';
         },
         validateUser() {
             this.$v.$touch();
-            console.log('validated');
         }
     }
 })
