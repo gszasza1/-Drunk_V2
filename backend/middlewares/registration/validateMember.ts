@@ -15,19 +15,21 @@ export const validateMemberInput = (
     typeof password !== "string" ||
     typeof username !== "string"
   ) {
-    res.status(StatusCodes.BAD_REQUEST).send({ error: "Hibás formátum" });
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .send({ error: "Hibás formátum" });
   } else if (password.length < 6) {
-    res
+    return res
       .status(StatusCodes.BAD_REQUEST)
       .send({ error: "Jelszónak 6 karakternél hosszabbnak kell lennie." });
   } else if (username.length < 6) {
-    res.status(StatusCodes.BAD_REQUEST).send({
+    return res.status(StatusCodes.BAD_REQUEST).send({
       error: "Felhasználónévnek 6 karakternél hosszabbnak kell lennie.",
     });
   } else {
-    User.find({ username: req.body.username }).then((x) => {
+    return User.find({ username: req.body.username }).then((x) => {
       if (x.length > 0) {
-        res
+        return res
           .status(StatusCodes.BAD_REQUEST)
           .send({ error: "Foglalt felhasználónév" });
       } else {
