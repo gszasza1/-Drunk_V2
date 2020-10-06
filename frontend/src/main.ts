@@ -32,6 +32,13 @@ Axios.interceptors.response.use(
         if (error.response.status === 400) {
             store.dispatch('openSnackbar', error.response.data);
         }
+        if (error.response.status === 401) {
+            store.dispatch('openSnackbar', 'Lejárt token');
+        }
+
+        if (error.response.status === 500) {
+            store.dispatch('openSnackbar', 'Szerver token');
+        }
         return error;
     }
 );
