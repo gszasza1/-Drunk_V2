@@ -3,29 +3,33 @@ import jwtDecode from 'jwt-decode';
 import { Module } from 'vuex';
 
 import { State } from '.';
+import router from '../router';
 
 export interface LoginState {
-    request: { username: string; password: string };
-    response: {};
+    response: {
+        accessToken?: string;
+        refreshToken?: string;
+        decodedToken?: {};
+    };
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
 
 export const login: Module<LoginState, State> = {
     state: {
-        request: { username: '', password: '' },
         response: {},
         error: '',
         params: { isRequesting: false, isError: false }
     },
     mutations: {
-        setLoginRequest(state, payload) {
-            state.request = payload;
+        setLoginRequest(state) {
             state.params.isRequesting = true;
-
             state.params.isError = false;
         },
-        setLoginResponse(state, payload) {
+        setLoginResponse(
+            state,
+            payload: { accessToken: string; refreshToken: string }
+        ) {
             state.params.isRequesting = false;
             state.response = {
                 ...payload,
@@ -34,19 +38,44 @@ export const login: Module<LoginState, State> = {
             state.params.isError = false;
             Axios.defaults.headers = {
                 ...Axios.defaults.headers,
-                Authentication: payload.accessToken
+                authorization: payload.accessToken
             };
+            localStorage.setItem('accessToken', payload.accessToken);
+            localStorage.setItem('refreshToken', payload.refreshToken);
+            router.push('/auth');
         },
-        setLoginError(state, payload) {
+        setLoginError(state, payload: any) {
             state.error = payload;
+            state.params.isRequesting = false;
+            state.params.isError = true;
+        },
+        setIsLoggedInRequest(state) {
+            Axios.defaults.headers = {
+                ...Axios.defaults.headers,
+                authorization: localStorage.getItem('accessToken')
+            };
+            state.params.isRequesting = true;
+            state.params.isError = false;
+        },
+        setIsLoggedInRespose(state) {
+            state.response = {
+                accessToken: localStorage.getItem('accessToken') ?? undefined,
+                refreshToken: localStorage.getItem('refreshToken') ?? undefined,
+                decodedToken: localStorage.getItem('accessToken')
+                    ? jwtDecode(localStorage.getItem('accessToken') as string)
+                    : {}
+            };
+            state.params.isRequesting = false;
+            state.params.isError = false;
+        },
+        setIsLoggedInError(state) {
             state.params.isRequesting = false;
             state.params.isError = true;
         }
     },
     actions: {
         async setLoginRequest(state, payload) {
-            state.commit('setLoginRequest', payload);
-
+            state.commit('setLoginRequest');
             return Axios.post('/login', payload, {})
                 .then(response => {
                     state.commit('setLoginResponse', response.data);
@@ -54,10 +83,19 @@ export const login: Module<LoginState, State> = {
                 .catch(error => {
                     state.commit('setLoginError', error);
                 });
+        },
+        async stillLoggedIn(state, payload) {
+            state.commit('setIsLoggedInRequest');
+            return Axios.post('/auth', payload, {})
+                .then(response => {
+                    state.commit('setIsLoggedInResponse', response.data);
+                })
+                .catch(error => {
+                    state.commit('setIsLoggedInError', error);
+                });
         }
     },
     getters: {
-        getLogin: state => state.request,
         getLoginRequesting: state => state.params.isRequesting,
         getLoginError: state => ({
             error: state.error,

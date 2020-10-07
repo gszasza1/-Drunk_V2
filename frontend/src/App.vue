@@ -51,7 +51,14 @@ import Component from 'vue-class-component';
     data: () => ({
         show: false
     }),
-
+    mounted() {
+        if (
+            localStorage.getItem('accessToken') &&
+            localStorage.getItem('refreshToken')
+        ) {
+            this.$store.dispatch('stillLoggedIn');
+        }
+    },
     methods: {
         onScnackbarClose() {
             return this.$store.dispatch('closedSnackbar');
