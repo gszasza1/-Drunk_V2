@@ -57,7 +57,7 @@ export const login: Module<LoginState, State> = {
             state.params.isRequesting = true;
             state.params.isError = false;
         },
-        setIsLoggedInRespose(state) {
+        setIsLoggedInResponse(state) {
             state.response = {
                 accessToken: localStorage.getItem('accessToken') ?? undefined,
                 refreshToken: localStorage.getItem('refreshToken') ?? undefined,
@@ -71,6 +71,7 @@ export const login: Module<LoginState, State> = {
         setIsLoggedInError(state) {
             state.params.isRequesting = false;
             state.params.isError = true;
+            router.push('/');
         }
     },
     actions: {
@@ -86,13 +87,12 @@ export const login: Module<LoginState, State> = {
         },
         async stillLoggedIn(state, payload) {
             state.commit('setIsLoggedInRequest');
-            return Axios.post('/auth', payload, {})
-                .then(response => {
-                    state.commit('setIsLoggedInResponse', response.data);
-                })
-                .catch(error => {
-                    state.commit('setIsLoggedInError', error);
-                });
+            try {
+                const data = await Axios.post('/auth', payload, {});
+                state.commit('setIsLoggedInResponse', data);
+            } catch (error) {
+                state.commit('setIsLoggedInError', error);
+            }
         }
     },
     getters: {

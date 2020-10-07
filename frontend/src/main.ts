@@ -23,7 +23,9 @@ Axios.defaults.headers = {
     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
     'Content-Type': 'application/json'
 };
-
+Axios.defaults.validateStatus = function(status) {
+    return status >= 200 && status < 300;
+};
 Axios.interceptors.response.use(
     response => {
         return response;
@@ -39,7 +41,7 @@ Axios.interceptors.response.use(
         if (error.response.status === 500) {
             store.dispatch('openSnackbar', 'Szerver token');
         }
-        return error;
+        throw error;
     }
 );
 
