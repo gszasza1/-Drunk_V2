@@ -35,7 +35,10 @@ Axios.interceptors.response.use(
             store.dispatch('openSnackbar', error.response.data);
         }
         if (error.response.status === 401) {
-            store.dispatch('openSnackbar', 'Lejárt token');
+            // Axios.post('login/refresh', {
+            //     refreshToken: localStorage.getItem('refreshToken')
+            // });
+            store.dispatch('refreshToken');
         }
 
         if (error.response.status === 500) {

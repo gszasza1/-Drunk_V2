@@ -93,6 +93,20 @@ export const login: Module<LoginState, State> = {
             } catch (error) {
                 state.commit('setIsLoggedInError', error);
             }
+        },
+        async refreshToken(state) {
+            if (localStorage.getItem('refreshToken')) {
+                try {
+                    const data = await Axios.post('/login/refresh', {
+                        refreshToken: localStorage.getItem('refreshToken')
+                    });
+                    state.commit('setIsLoggedInResponse', data);
+                } catch (error) {
+                    state.dispatch('openSnackbar', 'Lejárt token');
+                    localStorage.clear();
+                    state.commit('setIsLoggedInError', error);
+                }
+            }
         }
     },
     getters: {

@@ -49,3 +49,9 @@ export const createJwt = (req: Request, res: Response, next: NextFunction) => {
 export const filterToken = (token: string) => {
   refreshTokens = refreshTokens.filter((t) => t !== token);
 };
+export const refreshTokenExistOnServer = (token: string) => {
+  const hasToken = refreshTokens.includes(token);
+  refreshTokens = refreshTokens.filter((t) => t !== token);
+  return hasToken;
+};
+export const addRefreshToken = (token: string) => refreshTokens.push(token);

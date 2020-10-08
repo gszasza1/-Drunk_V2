@@ -16,7 +16,7 @@ export const isValidAccessToken = (
 
     jwt.verify(token, secret.secret, (err) => {
       if (err) {
-        return res.sendStatus(StatusCodes.FORBIDDEN);
+        return res.sendStatus(StatusCodes.UNAUTHORIZED);
       } else {
         return res.sendStatus(StatusCodes.OK);
       }

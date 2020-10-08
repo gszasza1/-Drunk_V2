@@ -1,9 +1,9 @@
 import express from 'express';
 
-import { createJwt } from '../middlewares/login';
+import { createJwt, refreshToken } from '../middlewares/login';
 
 var router = express.Router();
 
 router.post("", createJwt);
-router.post("/refresh");
+router.post("/refresh", refreshToken);
 export default router;

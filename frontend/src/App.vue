@@ -5,6 +5,7 @@
                 >Regisztráció</md-button
             >
             <md-button to="/login" class="md-primary">Bejelentkezés</md-button>
+            <md-button to="/auth" class="md-primary">Profil</md-button>
         </md-toolbar>
         <div class="content">
             <router-view />

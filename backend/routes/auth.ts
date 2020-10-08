@@ -1,9 +1,10 @@
 import express from 'express';
 
-import { isValidAccessToken } from '../middlewares/login';
+import { authenticateJWT, isValidAccessToken } from '../middlewares/login';
+import userRouter from './user';
 
-isValidAccessToken;
 var router = express.Router();
 
 router.post("", isValidAccessToken);
+router.use("/user", authenticateJWT, userRouter);
 export default router;

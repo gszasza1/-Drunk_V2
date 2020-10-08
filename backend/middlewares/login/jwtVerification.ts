@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import secret from '../../secret.json';
 
 export const authenticateJWT = (
-  req: Request & { currentUsername: string },
+  req: Request & { customData: any },
   res: Response,
   next: NextFunction
 ) => {
@@ -16,10 +16,9 @@ export const authenticateJWT = (
 
     jwt.verify(token, secret.secret, (err, username) => {
       if (err) {
-        return res.sendStatus(StatusCodes.FORBIDDEN);
+        return res.sendStatus(StatusCodes.UNAUTHORIZED);
       }
-      //TODO továbbadni usert
-      console.log(username);
+      req.customData = username;
       next();
     });
   } else {

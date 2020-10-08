@@ -1,30 +1,5 @@
+<template src="./Auth.html"> </template>
 
-<template>
-  <div>
-   
-  </div>
-</template>
+<script lang="ts" src="./Auth.ts"></script>
 
-<script>
-export default {
-  name: 'Auth',
-  created() {
-
-  },
-  data() {
-    return {
-    }
-  },
-  props: {
-   
-  },
-  methods: {
-   
-  },
-}
-</script>
-
-<style lang="scss" scoped>
-
-</style>
-
+<style lang="scss" scoped src="./Auth.scss"></style>
