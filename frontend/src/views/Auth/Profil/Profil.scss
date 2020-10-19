@@ -1,0 +1,26 @@
+@import '../../../variables.scss';
+p {
+    color: $gray;
+    font-size: 60px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20%;
+    font-weight: 700;
+}
+.wrapper {
+    border: none;
+    width: 100%;
+    table-layout: fixed;
+    tr > td {
+        padding: 20px;
+        &:first-child {
+            text-align: end;
+            color: $primary;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    }
+}

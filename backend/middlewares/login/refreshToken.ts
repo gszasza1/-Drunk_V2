@@ -36,6 +36,6 @@ export const refreshToken = (
           .send({ accessToken: "Bearer " + acceptToken, refreshToken });
       });
   } else {
-    res.sendStatus(StatusCodes.BAD_REQUEST);
+    res.status(StatusCodes.BAD_REQUEST).send({ error: "Lejárt session" });
   }
 };

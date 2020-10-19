@@ -13,7 +13,6 @@
                 >Regisztráció</md-button
             >
             <md-button to="/login" class="md-primary">Bejelentkezés</md-button>
-            <md-button to="/auth" class="md-primary">Profil</md-button>
         </md-toolbar>
         <div class="content">
             <router-view />
@@ -27,7 +26,11 @@
         >
             <span>{{ getSnackbarError }}</span>
         </md-snackbar>
-        <md-drawer :md-active.sync="getSidebarOpen" md-swipeable>
+        <md-drawer
+            md-closed="onSidebarClose()"
+            :md-active.sync="sidebarOpen"
+            md-swipeable
+        >
             <md-toolbar class="md-transparent" md-elevation="0">
                 <span class="md-title">Drunk</span>
             </md-toolbar>
@@ -35,7 +38,7 @@
             <md-list>
                 <md-list-item>
                     <md-icon>face</md-icon>
-                    <router-link to="/auth/profil" class="md-list-item-text"
+                    <router-link to="/auth/profile" class="md-list-item-text"
                         >Profil</router-link
                     >
                 </md-list-item>
@@ -76,7 +79,8 @@ import Component from 'vue-class-component';
 @Component({
     name: 'App',
     data: () => ({
-        show: false
+        show: false,
+        sidebarOpen: false
     }),
     mounted() {
         if (
@@ -90,6 +94,9 @@ import Component from 'vue-class-component';
         onScnackbarClose() {
             return this.$store.dispatch('closedSnackbar');
         },
+        onSidebarClose() {
+            return this.$store.dispatch('closeSidebar');
+        },
         openSidebar() {
             return this.$store.dispatch('openSidebar');
         }
@@ -100,6 +107,12 @@ import Component from 'vue-class-component';
                 if (action.type === 'openSnackbar') {
                     this.$data.show = true;
                 }
+                if (action.type === 'openSidebar') {
+                    this.$data.sidebarOpen = true;
+                }
+                if (action.type === 'closeSidebar') {
+                    this.$data.sidebarOpen = false;
+                }
             }
         });
     },
@@ -109,9 +122,6 @@ import Component from 'vue-class-component';
         },
         isLoggedIn() {
             return this.$store.getters.isLoggedin;
-        },
-        getSidebarOpen() {
-            return this.$store.getters.getSidebarOpen;
         }
     }
 })

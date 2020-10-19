@@ -4,15 +4,23 @@ import { StatusCodes } from 'http-status-codes';
 import { User } from '../../models/registerUser';
 
 export const getUserInformation = (
-  req: Request,
-  res: Response & { customData: any },
+  req: Request & { customData: any },
+  res: Response,
   next: NextFunction
 ) => {
-  const { username } = req.body;
+  const { username } = req.customData;
   User.findOne({ username })
     .then((user) => user.toObject())
     .then((x) => {
-      res.status(StatusCodes.OK).send({ username, type: username.type });
+      console.log(x);
+      res
+        .status(StatusCodes.OK)
+        .send({
+          username,
+          type: x.type,
+          createdAt: x.createdAt,
+          fullName: x.fullName,
+        });
     })
     .catch((x) => {
       res.status(StatusCodes.BAD_REQUEST).send({ error: "Hibás formátum" });

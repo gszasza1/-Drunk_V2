@@ -1,0 +1,23 @@
+<div>
+    <p>
+        Profile
+    </p>
+    <table class="wrapper">
+        <tbody>
+            <tr>
+                <td>Felhasználó név</td>
+                <td>{{userInformation.username}}</td>
+            </tr>
+
+            <tr v-if="!!userInformation.fullName">
+                <td>Teljes név</td>
+                <td>{{userInformation.fullName}}</td>
+            </tr>
+
+            <tr>
+                <td>Készült</td>
+                <td>{{userInformation.createdAt | dateformat}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

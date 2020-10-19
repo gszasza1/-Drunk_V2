@@ -14,15 +14,10 @@ export const authRoutesRoutes: Array<RouteConfig> = [
         },
         children: [
             {
-                path: 'member',
-                name: 'Személyi regisztráció',
-                component: () =>
-                    import('../views/Registration/Member/Member.vue')
-            },
-            {
-                path: 'firm',
-                name: 'Céges regisztráció',
-                component: () => import('../views/Registration/Firm/Firm.vue')
+                path: 'profile',
+                alias: '',
+                name: 'Fiók',
+                component: () => import('../views/Auth/Profil/Profil.vue')
             }
         ]
     }
