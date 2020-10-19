@@ -1,3 +1,4 @@
+import store from '@/store';
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
@@ -34,6 +35,7 @@ const router = new VueRouter({
 });
 router.afterEach(to => {
     document.title = to.name ?? 'Drunk';
+    store.dispatch('closeSidebar');
 });
 
 export default router;

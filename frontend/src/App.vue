@@ -1,6 +1,14 @@
 <template>
     <div id="app">
         <md-toolbar md-elevation="0">
+            <md-button
+                class="md-icon-button"
+                v-if="isLoggedIn"
+                @click="openSidebar()"
+            >
+                <md-icon>menu</md-icon>
+            </md-button>
+
             <md-button to="/registration" class="md-primary"
                 >Regisztráció</md-button
             >
@@ -18,10 +26,28 @@
             md-closed="onScnackbarClose()"
         >
             <span>{{ getSnackbarError }}</span>
-            <md-button class="md-primary" @click="showSnackbar = false"
-                >Retry</md-button
-            >
         </md-snackbar>
+        <md-drawer :md-active.sync="getSidebarOpen" md-swipeable>
+            <md-toolbar class="md-transparent" md-elevation="0">
+                <span class="md-title">Drunk</span>
+            </md-toolbar>
+
+            <md-list>
+                <md-list-item>
+                    <md-icon>face</md-icon>
+                    <router-link to="/auth/profil" class="md-list-item-text"
+                        >Profil</router-link
+                    >
+                </md-list-item>
+
+                <md-list-item>
+                    <md-icon>perm_scan_wifi</md-icon>
+                    <router-link to="/auth/festivals" class="md-list-item-text"
+                        >Fesztiválok</router-link
+                    >
+                </md-list-item>
+            </md-list>
+        </md-drawer>
     </div>
 </template>
 
@@ -63,6 +89,9 @@ import Component from 'vue-class-component';
     methods: {
         onScnackbarClose() {
             return this.$store.dispatch('closedSnackbar');
+        },
+        openSidebar() {
+            return this.$store.dispatch('openSidebar');
         }
     },
     created() {
@@ -77,6 +106,12 @@ import Component from 'vue-class-component';
     computed: {
         getSnackbarError() {
             return this.$store.getters.getSnackbarError;
+        },
+        isLoggedIn() {
+            return this.$store.getters.isLoggedin;
+        },
+        getSidebarOpen() {
+            return this.$store.getters.getSidebarOpen;
         }
     }
 })

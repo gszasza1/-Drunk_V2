@@ -114,6 +114,7 @@ export const login: Module<LoginState, State> = {
         getLoginError: state => ({
             error: state.error,
             isError: state.params.isError
-        })
+        }),
+        isLoggedin: state => !!state.response.decodedToken
     }
 };
