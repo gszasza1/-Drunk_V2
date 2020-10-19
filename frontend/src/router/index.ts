@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
 import Home from '../views/Home.vue';
+import { authRoutesRoutes } from './auth';
 import { registrationRoutes } from './registration';
 
 Vue.use(VueRouter);
@@ -22,7 +23,8 @@ const routes: Array<RouteConfig> = [
         name: 'Login',
         component: () => import('../views/Login/Login.vue')
     },
-    ...registrationRoutes
+    ...registrationRoutes,
+    ...authRoutesRoutes
 ];
 
 const router = new VueRouter({

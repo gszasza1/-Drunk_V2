@@ -1,6 +1,6 @@
 import { RouteConfig } from 'vue-router';
 
-export const registrationRoutes: Array<RouteConfig> = [
+export const authRoutesRoutes: Array<RouteConfig> = [
     {
         path: '/auth',
         name: 'Authorizált',
@@ -13,10 +13,6 @@ export const registrationRoutes: Array<RouteConfig> = [
             }
         },
         children: [
-            {
-                path: '',
-                redirect: 'member'
-            },
             {
                 path: 'member',
                 name: 'Személyi regisztráció',
