@@ -10,6 +10,7 @@ import Vuelidate from 'vuelidate';
 import App from './App.vue';
 import { ValidatorDirective } from './directives';
 import { dateformat } from './filters/date-format';
+import { LocalConfig } from './lib-config/material';
 import router from './router';
 import store from './store';
 
@@ -27,25 +28,50 @@ Axios.defaults.headers = {
 Axios.defaults.validateStatus = function(status) {
     return status >= 200 && status < 300;
 };
+Axios.defaults.headers = {};
+
+function refreshToken() {
+    if (store.state.login.params.isRefreshing) {
+        return store.state.login.refreshingCall;
+    }
+    store.commit('setRefreshState', true);
+    const refreshingCall = Axios.post('/login/refresh', {
+        refreshToken: localStorage.getItem('refreshToken')
+    }).then(({ data }) => {
+        store.commit('setToken', data);
+        store.commit('setRefreshState', false);
+        store.commit('setRefreshCall', undefined);
+        return Promise.resolve(true);
+    });
+    store.commit('setRefreshCall', refreshingCall);
+    return refreshingCall;
+}
+Axios.interceptors.request.use(value => {
+    value.headers = {
+        ...Axios.defaults.headers,
+        authorization: localStorage.getItem('accessToken')
+    };
+    return value;
+});
 Axios.interceptors.response.use(
-    response => {
-        return response;
-    },
+    response => response,
     error => {
-        if (error.response.status === 400) {
+        const originalRequest = error.config;
+        const status = error.response ? error.response.status : null;
+
+        if (status === 400) {
             store.dispatch('openSnackbar', error.response.data);
         }
-        if (error.response.status === 401) {
-            // Axios.post('login/refresh', {
-            //     refreshToken: localStorage.getItem('refreshToken')
-            // });
-            store.dispatch('refreshToken');
+        if (status === 401 && refreshToken) {
+            return refreshToken()!.then(_ => {
+                return Axios.request(error.config);
+            });
         }
 
-        if (error.response.status === 500) {
+        if (status === 500) {
             store.dispatch('openSnackbar', 'Szerver token');
         }
-        throw error;
+        return Promise.reject(error);
     }
 );
 
@@ -53,64 +79,7 @@ Axios.interceptors.response.use(
 const AltVue = Vue as any;
 AltVue.material = {
     ...AltVue.material,
-    locale: {
-        ...AltVue.material.locale,
-        dateFormat: 'yyyy. MM. dd.',
-        firstDayOfAWeek: 1,
-        days: [
-            'Vasárnap',
-            'Hétfő',
-            'Kedd',
-            'Szerda',
-            'Csütörtök',
-            'Péntek',
-            'Szombat'
-        ],
-        shortDays: ['Vasá', 'Hétf', 'Kedd', 'Szer', 'Csüt', 'Pén', 'Szomb'],
-        shorterDays: ['V', 'H', 'K', 'Sz', 'Cs', 'P', 'Sz'],
-        months: [
-            'Január',
-            'Február',
-            'Március',
-            'Április',
-            'Május',
-            'Június',
-            'Július',
-            'Agusztus',
-            'Szeptember',
-            'Október',
-            'November',
-            'December'
-        ],
-        shortMonths: [
-            'Jan',
-            'Feb',
-            'Már',
-            'Ápr',
-            'Máj',
-            'Jún',
-            'Júl',
-            'Aug',
-            'Szept',
-            'Okt',
-            'Nov',
-            'Dec'
-        ],
-        shorterMonths: [
-            'J',
-            'F',
-            'M',
-            'Á',
-            'M',
-            'Jú',
-            'Jú',
-            'Á',
-            'Sze',
-            'O',
-            'N',
-            'D'
-        ]
-    }
+    ...LocalConfig(AltVue.material.locale)
 };
 
 new Vue({

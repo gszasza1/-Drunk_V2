@@ -12,14 +12,15 @@ export interface LoginState {
         decodedToken?: {};
     };
     error: string;
-    params: { isRequesting: boolean; isError: boolean };
+    params: { isRequesting: boolean; isError: boolean; isRefreshing: boolean };
+    refreshingCall?: Promise<boolean>;
 }
 
 export const login: Module<LoginState, State> = {
     state: {
         response: {},
         error: '',
-        params: { isRequesting: false, isError: false }
+        params: { isRequesting: false, isError: false, isRefreshing: false }
     },
     mutations: {
         setLoginRequest(state) {
@@ -36,10 +37,7 @@ export const login: Module<LoginState, State> = {
                 decodedToken: jwtDecode(payload.accessToken)
             };
             state.params.isError = false;
-            Axios.defaults.headers = {
-                ...Axios.defaults.headers,
-                authorization: payload.accessToken
-            };
+
             localStorage.setItem('accessToken', payload.accessToken);
             localStorage.setItem('refreshToken', payload.refreshToken);
             router.push('/auth');
@@ -50,10 +48,6 @@ export const login: Module<LoginState, State> = {
             state.params.isError = true;
         },
         setIsLoggedInRequest(state) {
-            Axios.defaults.headers = {
-                ...Axios.defaults.headers,
-                authorization: localStorage.getItem('accessToken')
-            };
             state.params.isRequesting = true;
             state.params.isError = false;
         },
@@ -72,6 +66,25 @@ export const login: Module<LoginState, State> = {
             state.params.isRequesting = false;
             state.params.isError = true;
             router.push('/');
+        },
+        setRefreshState(state, payload) {
+            state.params.isRefreshing = payload;
+        },
+        setRefreshCall(state, payload) {
+            state.refreshingCall = payload;
+        },
+        setToken(state, payload) {
+            state.response = {
+                ...payload,
+                decodedToken: jwtDecode(payload.accessToken)
+            };
+            state.params.isError = false;
+            Axios.defaults.headers = {
+                ...Axios.defaults.headers,
+                authorization: payload.accessToken
+            };
+            localStorage.setItem('accessToken', payload.accessToken);
+            localStorage.setItem('refreshToken', payload.refreshToken);
         }
     },
     actions: {
@@ -92,20 +105,6 @@ export const login: Module<LoginState, State> = {
                 state.commit('setIsLoggedInResponse', data);
             } catch (error) {
                 state.commit('setIsLoggedInError', error);
-            }
-        },
-        async refreshToken(state) {
-            if (localStorage.getItem('refreshToken')) {
-                try {
-                    const data = await Axios.post('/login/refresh', {
-                        refreshToken: localStorage.getItem('refreshToken')
-                    });
-                    state.commit('setIsLoggedInResponse', data);
-                } catch (error) {
-                    state.dispatch('openSnackbar', 'Lejárt token');
-                    localStorage.clear();
-                    state.commit('setIsLoggedInError', error);
-                }
             }
         }
     },
