@@ -69,7 +69,7 @@ router.beforeEach((to, from, next) => {
                         ) {
                             console.log(2);
                             next(false);
-                        }
+                        } else next();
                     }
                 }
             });
@@ -89,7 +89,7 @@ router.beforeEach((to, from, next) => {
             ) {
                 console.log(4);
                 next(false);
-            }
+            } else next();
         }
     } else next();
 });

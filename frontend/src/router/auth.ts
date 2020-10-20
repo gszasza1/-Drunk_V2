@@ -23,14 +23,19 @@ export const authRoutesRoutes: Array<RouteConfig> = [
             {
                 path: 'festivals',
                 name: 'Fesztiválok',
-                component: () => import('../views/Auth/Profil/Profil.vue')
-            },
-
-            {
-                path: 'asd',
-                name: 'asd',
-                meta: { permission: 1 },
-                component: () => import('../views/Auth/Profil/Profil.vue')
+                component: () =>
+                    import('../views/Auth/Festivals/Festivals.vue'),
+                children: [
+                    {
+                        path: 'create',
+                        name: 'Új fesztivál',
+                        meta: { permission: 'Firm' },
+                        component: () =>
+                            import(
+                                '../views/Auth/Festivals/NewFestival/NewFestival.vue'
+                            )
+                    }
+                ]
             }
         ]
     }

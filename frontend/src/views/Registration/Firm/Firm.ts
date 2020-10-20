@@ -38,7 +38,7 @@ import { required } from 'vuelidate/lib/validators';
         validateUser() {
             this.$v.$touch();
             if (!this.$v.$invalid) {
-                this.$store.dispatch('setMemberRequest', this.$data.form);
+                this.$store.dispatch('setFirmRequest', this.$data.form);
             }
         }
     }
