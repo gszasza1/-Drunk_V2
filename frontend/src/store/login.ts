@@ -1,3 +1,4 @@
+import { UserType } from '@/interfaces/frombackend';
 import Axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import { Module } from 'vuex';
@@ -9,7 +10,12 @@ export interface LoginState {
     response: {
         accessToken?: string;
         refreshToken?: string;
-        decodedToken?: {};
+        decodedToken?: {
+            exp: number;
+            iat: number;
+            type: UserType;
+            username: string;
+        };
     };
     error: string;
     params: { isRequesting: boolean; isError: boolean; isRefreshing: boolean };
@@ -57,7 +63,7 @@ export const login: Module<LoginState, State> = {
                 refreshToken: localStorage.getItem('refreshToken') ?? undefined,
                 decodedToken: localStorage.getItem('accessToken')
                     ? jwtDecode(localStorage.getItem('accessToken') as string)
-                    : {}
+                    : undefined
             };
             state.params.isRequesting = false;
             state.params.isError = false;

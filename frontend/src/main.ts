@@ -9,6 +9,7 @@ import Vuelidate from 'vuelidate';
 
 import App from './App.vue';
 import { ValidatorDirective } from './directives';
+import { PermissionShowDirective } from './directives/permission-show';
 import { dateformat } from './filters/date-format';
 import { LocalConfig } from './lib-config/material';
 import router from './router';
@@ -18,6 +19,7 @@ Vue.use(Vuelidate);
 Vue.config.productionTip = false;
 Vue.use(VueMaterial);
 Vue.directive('validation', ValidatorDirective);
+Vue.directive('permission', PermissionShowDirective);
 Vue.filter('dateformat', dateformat);
 Axios.defaults.baseURL = 'http://localhost:3000/api';
 Axios.defaults.headers = {

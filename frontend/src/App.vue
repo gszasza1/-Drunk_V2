@@ -49,6 +49,14 @@
                         >Fesztiválok</router-link
                     >
                 </md-list-item>
+                <md-list-item v-permission="0">
+                    <md-icon>plus</md-icon>
+                    <router-link
+                        to="/auth/festivals/create"
+                        class="md-list-item-text"
+                        >Új fesztivál</router-link
+                    >
+                </md-list-item>
             </md-list>
         </md-drawer>
     </div>
