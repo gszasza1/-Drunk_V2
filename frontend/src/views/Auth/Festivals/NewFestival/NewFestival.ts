@@ -25,18 +25,18 @@ import AddTicket from './AddTicket/AddTicket.vue';
         form: {
             festivalName: {
                 required,
-                minLength: minLength(2)
+                minLength: minLength(6)
             },
             place: {
                 required,
-                minLength: minLength(2)
+                minLength: minLength(6)
             },
             time: {
                 required,
                 tooLate: x => !moment(x).isSameOrAfter(new Date())
             },
             ticket: {
-                empty: (x: []) => x.length === 0
+                empty: (x: []) => x.length !== 0
             }
         }
     },
@@ -53,14 +53,15 @@ import AddTicket from './AddTicket/AddTicket.vue';
         closeDialog() {
             this.$data.showDialog = false;
         },
-        saveDialog(event, value) {
+        saveDialog(value) {
             this.$data.showDialog = false;
-            this.$data.form.ticket.push(value);
+            this.$data.form.ticket.push({ ...value });
         },
         validateUser() {
             this.$v.$touch();
+
             if (!this.$v.$invalid) {
-                //   this.$store.dispatch('setMemberRequest', this.$data.form);
+                this.$store.dispatch('setNewFestivalRequest', this.$data.form);
             }
         }
     }

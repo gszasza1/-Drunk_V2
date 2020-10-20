@@ -5,10 +5,10 @@ import { minLength, required } from 'vuelidate/lib/validators';
 @Component({
     name: 'AddTicket',
     props: { showDialog: Boolean },
-    data: (): { form: { ticketName: string; ticketPrice: number } } => ({
+    data: (): { form: { ticketName: string; ticketPrice?: number } } => ({
         form: {
             ticketName: '',
-            ticketPrice: 0
+            ticketPrice: undefined
         }
     }),
 
@@ -41,6 +41,7 @@ import { minLength, required } from 'vuelidate/lib/validators';
             this.$v.$touch();
             if (!this.$v.$invalid) {
                 this.$emit('saveDialog', this.$data.form);
+                this.$data.form = { ticketName: '', ticketPrice: undefined };
             }
         }
     }

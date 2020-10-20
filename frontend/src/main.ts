@@ -39,12 +39,18 @@ function refreshToken() {
     store.commit('setRefreshState', true);
     const refreshingCall = Axios.post('/login/refresh', {
         refreshToken: localStorage.getItem('refreshToken')
-    }).then(({ data }) => {
-        store.commit('setToken', data);
-        store.commit('setRefreshState', false);
-        store.commit('setRefreshCall', undefined);
-        return Promise.resolve(true);
-    });
+    })
+        .then(({ data }) => {
+            store.commit('setToken', data);
+            store.commit('setRefreshState', false);
+            store.commit('setRefreshCall', undefined);
+            return Promise.resolve(true);
+        })
+        .catch(() => {
+            store.commit('setRefreshState', false);
+            store.commit('setRefreshCall', undefined);
+            return Promise.reject(true);
+        });
     store.commit('setRefreshCall', refreshingCall);
     return refreshingCall;
 }

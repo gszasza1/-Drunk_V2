@@ -58,4 +58,14 @@
         @closeDialog="closeDialog"
         @saveDialog="saveDialog"
     />
+    <ul>
+        <li v-for="item in form.ticket" :key="item.ticketName">
+            <md-card>
+                <md-card-content>
+                    <h3>{{ item.ticketName }}</h3>
+                    <p>Ár: {{ item.ticketPrice }} Ft</p></md-card-content
+                ></md-card
+            >
+        </li>
+    </ul>
 </div>

@@ -1,4 +1,23 @@
+@import '../../../../variables.scss';
+
 .margin-auto {
     margin: auto;
     margin-top: 50px;
+}
+ul {
+    padding: 0;
+    li {
+        list-style-type: none;
+        padding: 20px;
+        max-width: 500px;
+        margin: auto;
+        h3 {
+            color: $primary;
+            font-size: 36px;
+        }
+        p {
+            color: $gray;
+            font-size: 20px;
+        }
+    }
 }
