@@ -12,9 +12,10 @@ export const PermissionShowDirective: DirectiveOptions = {
             ) {
                 el.remove();
             } else if (
-                isNaN(+binding.value) &&
+                typeof +binding.value === 'undefined' &&
+                typeof binding.value === 'string' &&
                 store.state.login.response.decodedToken?.type !==
-                    UserType[UserType[binding.value]]
+                    UserType[binding.value + '']
             ) {
                 el.remove();
             }

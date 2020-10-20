@@ -49,7 +49,7 @@
                         >Fesztiválok</router-link
                     >
                 </md-list-item>
-                <md-list-item v-permission="0">
+                <md-list-item v-permission="'Member'">
                     <md-icon>plus</md-icon>
                     <router-link
                         to="/auth/festivals/create"
