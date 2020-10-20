@@ -50,7 +50,7 @@
                     >
                 </md-list-item>
                 <md-list-item v-permission="'Member'">
-                    <md-icon>plus</md-icon>
+                    <md-icon>add</md-icon>
                     <router-link
                         to="/auth/festivals/create"
                         class="md-list-item-text"

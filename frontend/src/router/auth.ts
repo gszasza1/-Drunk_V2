@@ -12,11 +12,24 @@ export const authRoutesRoutes: Array<RouteConfig> = [
                 next({ path: '' });
             }
         },
+
         children: [
             {
                 path: 'profile',
                 alias: '',
                 name: 'Fiók',
+                component: () => import('../views/Auth/Profil/Profil.vue')
+            },
+            {
+                path: 'festivals',
+                name: 'Fesztiválok',
+                component: () => import('../views/Auth/Profil/Profil.vue')
+            },
+
+            {
+                path: 'asd',
+                name: 'asd',
+                meta: { permission: 1 },
                 component: () => import('../views/Auth/Profil/Profil.vue')
             }
         ]
