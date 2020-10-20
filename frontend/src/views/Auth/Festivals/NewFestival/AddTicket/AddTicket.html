@@ -1,0 +1,37 @@
+<div>
+    <md-dialog :md-active.sync="showDialog">
+        <form novalidate class="md-layout" @submit.prevent="validateUser">
+            <div>
+                <div class="md-layout-item md-small-size-100">
+                    <md-field :class="getValidationClass('ticketName')">
+                        <label for="ticketName">Név</label>
+                        <md-input
+                            v-validation="$v.form.ticketName"
+                            name="ticketName"
+                            id="ticketName"
+                            v-model="form.ticketName"
+                        />
+                    </md-field>
+                </div>
+                <div class="md-layout-item md-small-size-100">
+                    <md-field :class="getValidationClass('ticketPrice')">
+                        <label for="ticketPrice">Ár</label>
+                        <md-input
+                            v-validation="$v.form.ticketPrice"
+                            name="ticketPrice"
+                            id="ticketPrice"
+                            v-model="form.ticketPrice"
+                        />
+                        <span class="md-suffix">Ft</span>
+                    </md-field>
+                </div>
+            </div>
+            <div>
+                <md-button class="md-primary" @click="cancel">Mégse</md-button>
+                <md-button class="md-primary" type="submit"
+                    >Hozzáadás</md-button
+                >
+            </div>
+        </form>
+    </md-dialog>
+</div>

@@ -19,6 +19,8 @@ export const ValidatorDirective: DirectiveOptions = {
             if (validation.length > 0 && validatorError[validation[0]]) {
                 const sajt = document.createElement('span');
                 sajt.className = 'md-error';
+                sajt.style.display = 'block';
+                sajt.style.color = '#ff1744';
                 sajt.id = 'error-' + el.id;
                 sajt.textContent = validatorError[validation[0]];
                 Vue.nextTick(() => {
