@@ -14,7 +14,7 @@ export interface UserState {
     params: { isRequesting: boolean; isError: boolean };
 }
 
-export const User: Module<UserState, State> = {
+export const user: Module<UserState, State> = {
     state: {
         error: '',
         params: { isError: false, isRequesting: false },
