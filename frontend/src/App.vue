@@ -45,7 +45,9 @@
 
                 <md-list-item>
                     <md-icon>perm_scan_wifi</md-icon>
-                    <router-link to="/auth/festivals" class="md-list-item-text"
+                    <router-link
+                        to="/auth/festivals/list"
+                        class="md-list-item-text"
                         >Fesztiválok</router-link
                     >
                 </md-list-item>

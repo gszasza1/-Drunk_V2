@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { festivalDetail, FestivalDetailState } from './festival-detail';
 import { festivalList, FestivalListState } from './festival-list';
 import { firm, FirmState } from './firm';
 import { login, LoginState } from './login';
@@ -12,7 +13,16 @@ import { user, UserState } from './user';
 Vue.use(Vuex);
 
 export default new Vuex.Store<State>({
-    modules: { member, snackbar, login, user, firm, newFestival, festivalList },
+    modules: {
+        member,
+        snackbar,
+        login,
+        user,
+        firm,
+        newFestival,
+        festivalList,
+        festivalDetail
+    },
     strict: true,
     devtools: true
 });
@@ -25,4 +35,5 @@ export interface State {
     firm: FirmState;
     newFestival: NewFestivalState;
     festivalList: FestivalListState;
+    festivalDetail: FestivalDetailState;
 }
