@@ -49,6 +49,8 @@ function refreshToken() {
         .catch(() => {
             store.commit('setRefreshState', false);
             store.commit('setRefreshCall', undefined);
+            localStorage.clear();
+            router.push('');
             return Promise.reject(true);
         });
     store.commit('setRefreshCall', refreshingCall);
@@ -63,17 +65,15 @@ Axios.interceptors.request.use(value => {
 });
 Axios.interceptors.response.use(
     response => response,
-    error => {
-        const originalRequest = error.config;
+    async error => {
         const status = error.response ? error.response.status : null;
 
         if (status === 400) {
             store.dispatch('openSnackbar', error.response.data);
         }
         if (status === 401 && refreshToken) {
-            return refreshToken()!.then(_ => {
-                return Axios.request(error.config);
-            });
+            await refreshToken();
+            return Axios.request(error.config);
         }
 
         if (status === 500) {
