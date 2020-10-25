@@ -34,6 +34,14 @@ export const authRoutesRoutes: Array<RouteConfig> = [
                             import(
                                 '../views/Auth/Festivals/NewFestival/NewFestival.vue'
                             )
+                    },
+                    {
+                        path: 'list',
+                        name: 'Fesztivál lista',
+                        component: () =>
+                            import(
+                                '../views/Auth/Festivals/FestivalList/FestivalList.vue'
+                            )
                     }
                 ]
             }
