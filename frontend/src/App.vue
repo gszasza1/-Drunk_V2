@@ -59,6 +59,22 @@
                         >Új fesztivál</router-link
                     >
                 </md-list-item>
+                <md-list-item>
+                    <md-icon>perm_scan_wifi</md-icon>
+                    <router-link
+                        to="/auth/drinks/list"
+                        class="md-list-item-text"
+                        >Italok</router-link
+                    >
+                </md-list-item>
+                <md-list-item v-permission="'Firm'">
+                    <md-icon>add</md-icon>
+                    <router-link
+                        to="/auth/drinks/create"
+                        class="md-list-item-text"
+                        >Új ital</router-link
+                    >
+                </md-list-item>
             </md-list>
         </md-drawer>
     </div>
@@ -92,14 +108,6 @@ import Component from 'vue-class-component';
         show: false,
         sidebarOpen: false
     }),
-    mounted() {
-        if (
-            localStorage.getItem('accessToken') &&
-            localStorage.getItem('refreshToken')
-        ) {
-            this.$store.dispatch('stillLoggedIn');
-        }
-    },
     methods: {
         onScnackbarClose() {
             return this.$store.dispatch('closedSnackbar');

@@ -40,14 +40,11 @@ router.afterEach(to => {
 });
 
 router.beforeEach((to, from, next) => {
-    console.log(to.meta.permission);
     if (to.meta.permission !== undefined) {
-        console.log('123123');
         if (
             store.state.login.params.isRequesting ||
             store.state.login.params.isRefreshing
         ) {
-            console.log('33');
             store.subscribeAction({
                 after: action => {
                     if (
@@ -59,7 +56,6 @@ router.beforeEach((to, from, next) => {
                                 store.state.login.response.decodedToken
                                     ?.type === +to.meta.permission) === false
                         ) {
-                            console.log(1);
                             next(false);
                         } else if (
                             typeof +to.meta.permission === 'undefined' &&
@@ -67,7 +63,6 @@ router.beforeEach((to, from, next) => {
                             store.state.login.response.decodedToken?.type !==
                                 UserType[to.meta.permission + '']
                         ) {
-                            console.log(2);
                             next(false);
                         } else {
                             next();
@@ -81,7 +76,6 @@ router.beforeEach((to, from, next) => {
                     store.state.login.response.decodedToken?.type ===
                         +to.meta.permission) === false
             ) {
-                console.log(3);
                 next(false);
             } else if (
                 typeof +to.meta.permission === 'undefined' &&
@@ -89,7 +83,6 @@ router.beforeEach((to, from, next) => {
                 store.state.login.response.decodedToken?.type !==
                     UserType[to.meta.permission + '']
             ) {
-                console.log(4);
                 next(false);
             } else {
                 next();

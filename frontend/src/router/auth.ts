@@ -44,6 +44,28 @@ export const authRoutesRoutes: Array<RouteConfig> = [
                             )
                     }
                 ]
+            },
+            {
+                path: 'drinks',
+                name: 'Italok',
+                component: () => import('../views/Auth/Drinks/Drinks.vue'),
+                children: [
+                    {
+                        path: 'create',
+                        name: 'Új ital',
+                        meta: { permission: 'Firm' },
+                        component: () =>
+                            import('../views/Auth/Drinks/NewDrink/NewDrink.vue')
+                    },
+                    {
+                        path: 'list',
+                        name: 'Ital lista',
+                        component: () =>
+                            import(
+                                '../views/Auth/Drinks/DrinkList/DrinkList.vue'
+                            )
+                    }
+                ]
             }
         ]
     }

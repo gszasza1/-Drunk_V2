@@ -94,6 +94,9 @@ export const login: Module<LoginState, State> = {
         }
     },
     actions: {
+        async setIsLoggedInResponse(state, payload) {
+            console.log('');
+        },
         async setLoginRequest(state, payload) {
             state.commit('setLoginRequest');
             return Axios.post('/login', payload, {})
@@ -109,6 +112,7 @@ export const login: Module<LoginState, State> = {
             try {
                 const data = await Axios.post('/auth', payload, {});
                 state.commit('setIsLoggedInResponse', data);
+                state.dispatch('setIsLoggedInResponse');
             } catch (error) {
                 state.commit('setIsLoggedInError', error);
             }

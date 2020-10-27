@@ -14,7 +14,6 @@ export const refreshToken = (
   const { refreshToken } = req.body;
   if (refreshTokenExistOnServer(req.body.refreshToken)) {
     const decodedToken = jwt.decode(refreshToken);
-    console.log(decodedToken);
     User.findOne({ username: (decodedToken as any).username })
       .then((user) => user.toObject())
       .then((user) => {

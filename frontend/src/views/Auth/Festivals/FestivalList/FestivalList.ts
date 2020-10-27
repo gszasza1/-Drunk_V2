@@ -20,7 +20,6 @@ import FestivalDetail from './FestivalDetails/FestivalDetail.vue';
             this.$data.showDialog = false;
         },
         openDialog(id: string) {
-            console.log(id);
             this.$data.currentId = id;
             this.$data.showDialog = true;
         },

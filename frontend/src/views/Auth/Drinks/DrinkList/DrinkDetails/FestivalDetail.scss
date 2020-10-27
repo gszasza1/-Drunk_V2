@@ -1,0 +1,12 @@
+@import '../../../../../variables.scss';
+
+.dialog {
+    padding: 20px;
+    padding-top: 30px;
+    p {
+        > span {
+            color: $primary;
+            font-weight: 700;
+        }
+    }
+}

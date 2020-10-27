@@ -1,0 +1,14 @@
+<div class="dialog">
+    <md-dialog-title>{{festivalDetail.festivalName}}</md-dialog-title>
+    <md-content>
+        <div>
+            <p><span>Hely: </span>{{festivalDetail.place}}</p>
+            <p><span>Idő: </span>{{festivalDetail.time | dateformat}}</p>
+            <p><span>Résztvevők: </span><ul><li v-for="item in festivalDetail.participants">{{item.fullName}}</li></ul></p>
+            <p><span>Jegyek: </span><ul><li v-for="ticket in festivalDetail.ticket">{{ticket.ticketName}} - {{ticket.ticketPrice}} Ft</li></ul></p>
+        </div>
+    </md-content>
+    <md-dialog-actions>
+        <md-button class="md-primary" @click="cancel()">Close</md-button>
+    </md-dialog-actions>
+</div>

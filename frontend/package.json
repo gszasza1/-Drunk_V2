@@ -15,6 +15,7 @@
         "jwt-decode": "^3.0.0",
         "moment": "^2.29.1",
         "register-service-worker": "^1.7.1",
+        "socket.io-client": "^2.3.1",
         "vue": "^2.6.11",
         "vue-class-component": "^7.2.3",
         "vue-material": "^1.0.0-beta-15",
@@ -26,6 +27,7 @@
     "devDependencies": {
         "@types/jwt-decode": "^2.2.1",
         "@types/moment": "^2.13.0",
+        "@types/socket.io-client": "^1.4.34",
         "@types/vuelidate": "^0.7.13",
         "@typescript-eslint/eslint-plugin": "^2.33.0",
         "@typescript-eslint/parser": "^2.33.0",

@@ -5,10 +5,12 @@ import http from 'http';
 import createError from 'http-errors';
 import logger from 'morgan';
 import path from 'path';
+import io from 'socket.io';
 import swaggerUi from 'swagger-ui-express';
 
 import database from './models';
 import indexRouter from './routes';
+import { addToken, divideToken } from './socket';
 
 var debug = require("debug")("backend:server");
 
@@ -72,6 +74,18 @@ var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 var server = http.createServer(app);
+const webSocket = io(server);
+
+webSocket.on("connection", (socket) => {
+  socket.on("DEFINE_ID", (localSocket) => {
+    console.log(socket.id);
+    if (socket) {
+      addToken(socket.id, {
+        accessToken: divideToken(localSocket.accessToken),
+      });
+    }
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.

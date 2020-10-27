@@ -1,0 +1,22 @@
+<div>
+    <md-table md-card v-model="drinkList">
+        <md-table-toolbar>
+            <h1 class="md-title">Users</h1>
+        </md-table-toolbar>
+
+        <md-table-row slot="md-table-row" slot-scope="{ item }">
+            <md-table-cell md-label="Id" md-sort-by="id" md-numeric
+                >{{ item.id }}</md-table-cell
+            >
+            <md-table-cell md-label="Név" md-sort-by="drinkName"
+                >{{ item.drinkName }}</md-table-cell
+            >
+            <md-table-cell md-label="Ár" md-sort-by="price"
+                >{{ item.price }}</md-table-cell
+            >
+            <md-table-cell md-label="Eladó" md-sort-by="provider"
+                >{{ item.provider }}</md-table-cell
+            >
+        </md-table-row>
+    </md-table>
+</div>

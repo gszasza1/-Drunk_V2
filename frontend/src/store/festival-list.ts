@@ -32,7 +32,6 @@ export const festivalList: Module<FestivalListState, State> = {
             state.params.isError = false;
         },
         setFestivalListResponse(state, payload) {
-            console.log(payload);
             state.params.isRequesting = false;
             state.response = payload ?? [];
             state.params.isError = false;

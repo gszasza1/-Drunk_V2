@@ -2,7 +2,8 @@ import Vue, { DirectiveOptions } from 'vue';
 
 const validatorError = {
     minLength: 'Túl rövid',
-    required: 'Kötelező mező'
+    required: 'Kötelező mező',
+    integer: 'Számnak kell lenni'
 };
 
 export const ValidatorDirective: DirectiveOptions = {

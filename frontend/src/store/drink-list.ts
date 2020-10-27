@@ -3,21 +3,21 @@ import { Module } from 'vuex';
 
 import { State } from '.';
 
-export interface FestivalDetailItem {
+export interface DrinkListItem {
     id: string;
-    place: string;
-    time: Date;
-    name: string;
+    drinkName: string;
+    price: number;
+    provider: string;
 }
 
-export interface FestivalDetailState {
+export interface DrinkListState {
     request: {};
-    response: FestivalDetailItem[];
+    response: DrinkListItem[];
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
 
-export const festivalDetail: Module<FestivalDetailState, State> = {
+export const drinkList: Module<DrinkListState, State> = {
     state: {
         request: {},
         response: [],
@@ -25,39 +25,39 @@ export const festivalDetail: Module<FestivalDetailState, State> = {
         params: { isRequesting: false, isError: false }
     },
     mutations: {
-        setFestivalDetailRequest(state, payload) {
+        setDrinkListRequest(state, payload) {
             state.request = payload;
             state.params.isRequesting = true;
             state.params.isError = false;
         },
-        setFestivalDetailResponse(state, payload) {
+        setDrinkListResponse(state, payload) {
             state.params.isRequesting = false;
             state.response = payload ?? [];
             state.params.isError = false;
         },
-        setFestivalDetailError(state, payload) {
+        setDrinkListError(state, payload) {
             state.error = payload;
             state.params.isRequesting = false;
             state.params.isError = true;
         }
     },
     actions: {
-        async setFestivalDetailRequest(state, payload) {
-            state.commit('setFestivalDetailRequest', payload);
+        async setDrinkListRequest(state, payload) {
+            state.commit('setDrinkListRequest', payload);
 
-            Axios.get('/auth/festival/' + payload)
+            Axios.get('/auth/Drink')
                 .then(response => {
-                    state.commit('setFestivalDetailResponse', response.data);
+                    state.commit('setDrinkListResponse', response.data);
                 })
                 .catch(error => {
-                    state.commit('setFestivalDetailError', error);
+                    state.commit('setDrinkListError', error);
                 });
         }
     },
     getters: {
-        getFestivalDetail: state => state.response,
-        getFestivalDetailRequesting: state => state.params.isRequesting,
-        getFestivalDetailError: state => ({
+        getDrinkList: state => state.response,
+        getDrinkListRequesting: state => state.params.isRequesting,
+        getDrinkListError: state => ({
             error: state.error,
             isError: state.params.isError
         })

@@ -12,15 +12,12 @@ export const getUserInformation = (
   User.findOne({ username })
     .then((user) => user.toObject())
     .then((x) => {
-      console.log(x);
-      res
-        .status(StatusCodes.OK)
-        .send({
-          username,
-          type: x.type,
-          createdAt: x.createdAt,
-          fullName: x.fullName,
-        });
+      res.status(StatusCodes.OK).send({
+        username,
+        type: x.type,
+        createdAt: x.createdAt,
+        fullName: x.fullName,
+      });
     })
     .catch((x) => {
       res.status(StatusCodes.BAD_REQUEST).send({ error: "Hibás formátum" });

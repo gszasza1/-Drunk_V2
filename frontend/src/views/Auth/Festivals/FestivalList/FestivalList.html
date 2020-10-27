@@ -19,6 +19,7 @@
             >
             <md-table-cell md-label="Műveletek" md-sort-by="operations">
                 <md-button
+                    v-permission="'Firm'"
                     @click="participate(item.id)"
                     v-if="!item.participate"
                     class="md-icon-button md-primary"
@@ -26,6 +27,7 @@
                     <md-icon>add</md-icon>
                 </md-button>
                 <md-button
+                    v-permission="'Firm'"
                     v-if="item.participate"
                     @click="notParcipate(item.id)"
                     class="md-icon-button md-primary"
