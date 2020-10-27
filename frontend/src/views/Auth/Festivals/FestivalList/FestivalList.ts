@@ -23,6 +23,12 @@ import FestivalDetail from './FestivalDetails/FestivalDetail.vue';
             console.log(id);
             this.$data.currentId = id;
             this.$data.showDialog = true;
+        },
+        participate(id: string) {
+            this.$store.dispatch('participateInFestival', id);
+        },
+        notParcipate(id: string) {
+            this.$store.dispatch('notParticipateInFestival', id);
         }
     },
     computed: {

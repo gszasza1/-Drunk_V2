@@ -4,23 +4,42 @@
             <h1 class="md-title">Users</h1>
         </md-table-toolbar>
 
-        <md-table-row
-            @click="openDialog(item.id)"
-            slot="md-table-row"
-            slot-scope="{ item }"
-        >
+        <md-table-row slot="md-table-row" slot-scope="{ item }">
             <md-table-cell md-label="Id" md-sort-by="id" md-numeric
                 >{{ item.id }}</md-table-cell
             >
             <md-table-cell md-label="Név" md-sort-by="name"
                 >{{ item.name }}</md-table-cell
             >
-            <md-table-cell md-label="Hely" md-sort-by="email"
+            <md-table-cell md-label="Hely" md-sort-by="place"
                 >{{ item.place }}</md-table-cell
             >
-            <md-table-cell md-label="Idő" md-sort-by="gender"
+            <md-table-cell md-label="Idő" md-sort-by="time"
                 >{{ item.time | dateformat }}</md-table-cell
             >
+            <md-table-cell md-label="Műveletek" md-sort-by="operations">
+                <md-button
+                    @click="participate(item.id)"
+                    v-if="!item.participate"
+                    class="md-icon-button md-primary"
+                >
+                    <md-icon>add</md-icon>
+                </md-button>
+                <md-button
+                    v-if="item.participate"
+                    @click="notParcipate(item.id)"
+                    class="md-icon-button md-primary"
+                >
+                    <md-icon>south</md-icon>
+                </md-button>
+
+                <md-button
+                    @click="openDialog(item.id)"
+                    class="md-icon-button md-primary"
+                >
+                    <md-icon>menu</md-icon>
+                </md-button>
+            </md-table-cell>
         </md-table-row>
     </md-table>
     <md-dialog :md-active.sync="showDialog">

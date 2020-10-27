@@ -54,6 +54,24 @@ export const festivalList: Module<FestivalListState, State> = {
                 .catch(error => {
                     state.commit('setFestivalListError', error);
                 });
+        },
+        async participateInFestival(state, payload) {
+            Axios.post('/auth/festival/participate/' + payload)
+                .then(response => {
+                    state.dispatch('setFestivalListRequest');
+                })
+                .catch(error => {
+                    state.commit('setFestivalListError', error);
+                });
+        },
+        async notParticipateInFestival(state, payload) {
+            Axios.delete('/auth/festival/participate/' + payload)
+                .then(response => {
+                    state.dispatch('setFestivalListRequest');
+                })
+                .catch(error => {
+                    state.commit('setFestivalListError', error);
+                });
         }
     },
     getters: {
