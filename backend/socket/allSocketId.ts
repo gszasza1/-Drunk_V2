@@ -1,0 +1,5 @@
+export const allSocketId = {
+  DEFINE_ID: "DEFINE_ID",
+  ALCOHOL_BOUGHT: "ALCOHOL_BOUGHT",
+  ALCOHOL_SERVED: "ALCOHOL_SERVED",
+};

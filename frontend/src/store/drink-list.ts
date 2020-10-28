@@ -45,12 +45,22 @@ export const drinkList: Module<DrinkListState, State> = {
         async setDrinkListRequest(state, payload) {
             state.commit('setDrinkListRequest', payload);
 
-            Axios.get('/auth/Drink')
+            Axios.get('/auth/drink')
                 .then(response => {
                     state.commit('setDrinkListResponse', response.data);
                 })
                 .catch(error => {
                     state.commit('setDrinkListError', error);
+                });
+        },
+        async buyDrink(state, payload) {
+            Axios.post('/auth/drink/buydrink', { number: 1, drinkId: payload })
+                .then(response => {
+                    console.log('liba');
+                    // state.commit('setDrinkListResponse', response.data);
+                })
+                .catch(error => {
+                    //   state.commit('setDrinkListError', error);
                 });
         }
     },

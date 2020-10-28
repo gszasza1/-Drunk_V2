@@ -16,23 +16,18 @@ import Component from 'vue-class-component';
             after: (action, state: State) => {
                 console.log(action.type);
                 if (action.type === 'setIsLoggedInResponse') {
-                    this.$data.socket = io('localhost:3000');
-                    console.log('asd');
-                    (this.$data.socket as SocketIOClient.Socket).open();
-                    console.log('asddf');
-                    (this.$data.socket as SocketIOClient.Socket).on(
-                        'connect',
-                        () => {
-                            console.log(this.$data.socket.connected);
-                            (this.$data.socket as SocketIOClient.Socket).emit(
-                                'DEFINE_ID',
-                                {
-                                    accessToken:
-                                        state.login.response.accessToken
-                                }
-                            );
-                        }
-                    );
+                    this.$data.socket = io(
+                        'localhost:3000'
+                    ) as SocketIOClient.Socket;
+                    this.$data.socket.open();
+                    this.$data.socket.on('connect', () => {
+                        this.$data.socket.emit('DEFINE_ID', {
+                            accessToken: state.login.response.accessToken
+                        });
+                    });
+                    this.$data.socket.on('ALCOHOL_BOUGHT', x => {
+                        console.log('emited', x);
+                    });
                 }
                 if (action.type === 'socket/buyDrink') {
                     (this.$data.socket as SocketIOClient.Socket).emit(

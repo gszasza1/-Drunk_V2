@@ -44,3 +44,23 @@ export interface IFestival {
   ticket?: { ticketName: string; ticketPrice: number }[];
   participants?: string[];
 }
+export interface ISocketDrink {
+  drinkId: string;
+}
+export interface IBuyDrink {
+  provider: string;
+  number: number;
+  drinkId: string;
+}
+export interface IBuyDrinkSchema {
+  _id: string;
+  createdAt: Date;
+  provider: string;
+  number: number;
+  drinkId: string;
+}
+export interface IBuyDrinkPopulated {
+  provider: IUser;
+  number: number;
+  drinkId: IDrink;
+}

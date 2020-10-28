@@ -17,6 +17,15 @@
             <md-table-cell md-label="Eladó" md-sort-by="provider"
                 >{{ item.provider }}</md-table-cell
             >
+            <md-table-cell md-label="Műveletek" md-sort-by="operations">
+                <md-button
+                    v-permission="'Member'"
+                    @click="buy(item.id)"
+                    class="md-icon-button md-primary"
+                >
+                    <md-icon>add</md-icon>
+                </md-button></md-table-cell
+            >
         </md-table-row>
     </md-table>
 </div>

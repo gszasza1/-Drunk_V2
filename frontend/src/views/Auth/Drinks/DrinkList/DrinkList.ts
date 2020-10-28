@@ -6,6 +6,11 @@ import Component from 'vue-class-component';
     mounted() {
         this.$store.dispatch('setDrinkListRequest');
     },
+    methods: {
+        buy(drinkId: string) {
+            return this.$store.dispatch('buyDrink', drinkId);
+        }
+    },
     computed: {
         drinkList() {
             return this.$store.getters.getDrinkList;

@@ -10,7 +10,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import database from './models';
 import indexRouter from './routes';
-import { addToken, divideToken } from './socket';
+import { register } from './socket/register';
 
 var debug = require("debug")("backend:server");
 
@@ -74,17 +74,10 @@ var port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 var server = http.createServer(app);
-const webSocket = io(server);
+export const webSocket = io(server);
 
 webSocket.on("connection", (socket) => {
-  socket.on("DEFINE_ID", (localSocket) => {
-    console.log(socket.id);
-    if (socket) {
-      addToken(socket.id, {
-        accessToken: divideToken(localSocket.accessToken),
-      });
-    }
-  });
+  register(socket);
 });
 
 /**
