@@ -1,7 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
 
-import { User } from './registerUser';
-
 export const registerFestivalScheme = new mongoose.Schema(
   {
     festivalName: { type: String, minlength: 6, required: true, unique: true },
@@ -18,13 +16,6 @@ export const registerFestivalScheme = new mongoose.Schema(
   { timestamps: true }
 );
 
-export interface Festival {
-  festivalName: string;
-  place: string;
-  time?: Date;
-  ticket?: { ticketName: string; ticketPrice: number }[];
-  participants?: User;
-}
 registerFestivalScheme.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
   object.id = _id;

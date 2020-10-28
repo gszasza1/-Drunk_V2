@@ -1,16 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { IFestival, UserType } from '../../interfaces';
 import { Festival } from '../../models/addFestival';
-import { User, UserType } from '../../models/registerUser';
-
-interface localFestival {
-  festivalName: string;
-  place: string;
-  time?: Date;
-  ticket?: { ticketName: string; ticketPrice: number }[];
-  participants?: string[];
-}
+import { User } from '../../models/registerUser';
 
 export const deleteParticipageFestival = async (
   req: Request & { customData: any },
@@ -25,7 +18,7 @@ export const deleteParticipageFestival = async (
   }).exec();
   if (deleteUser.toObject().type === UserType.Firm) {
     const temp = await Festival.findOne({ _id: req.params.id });
-    let decodedDocument: localFestival = temp.toObject();
+    let decodedDocument: IFestival = temp.toObject();
 
     temp["participants"] = decodedDocument.participants.filter(
       (x) => x + "" !== deleteUser._id + ""

@@ -10,16 +10,6 @@ export const registerMemberScheme = new mongoose.Schema(
   { timestamps: true }
 );
 
-export interface User {
-  username: string;
-  password: string;
-  fullName?: string;
-}
-export enum UserType {
-  Member,
-  Firm,
-}
-
 registerMemberScheme.method("toJSON", function () {
   const { __v, _id, ...object } = this.toObject();
   object.id = _id;

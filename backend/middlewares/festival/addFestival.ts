@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { UserType } from '../../interfaces';
 import { Festival } from '../../models/addFestival';
-import { User, UserType } from '../../models/registerUser';
+import { User } from '../../models/registerUser';
 
 export const addFestival = async (
   req: Request & { customData: any },

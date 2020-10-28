@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { User, UserType } from '../../models/registerUser';
+import { UserType } from '../../interfaces';
+import { User } from '../../models/registerUser';
 
 export const createMember = (
   req: Request,

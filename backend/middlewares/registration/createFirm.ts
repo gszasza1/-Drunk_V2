@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { User, UserType } from '../../models/registerUser';
+import { UserType } from '../../interfaces';
+import { User } from '../../models/registerUser';
 
 export const createFirm = (req: Request, res: Response, next: NextFunction) => {
   User.create({ ...req.body, type: UserType.Firm })

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { addRefreshToken, refreshTokenExistOnServer } from '.';
 import { User } from '../../models/registerUser';
 import secret from '../../secret.json';
+import { deleteByJWTToken, divideToken } from '../../socket';
 
 export const refreshToken = (
   req: Request & { currentUsername: string },
@@ -12,6 +13,9 @@ export const refreshToken = (
   next: NextFunction
 ) => {
   const { refreshToken } = req.body;
+  if (req.headers.authorization) {
+    deleteByJWTToken(divideToken(req.headers.authorization));
+  }
   if (refreshTokenExistOnServer(req.body.refreshToken)) {
     const decodedToken = jwt.decode(refreshToken);
     User.findOne({ username: (decodedToken as any).username })

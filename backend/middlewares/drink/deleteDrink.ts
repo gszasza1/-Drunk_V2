@@ -1,16 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { UserType } from '../../interfaces';
 import { Drink } from '../../models/drink';
-import { User, UserType } from '../../models/registerUser';
-
-interface localDrink {
-  DrinkName: string;
-  place: string;
-  time?: Date;
-  ticket?: { ticketName: string; ticketPrice: number }[];
-  participants?: string[];
-}
+import { User } from '../../models/registerUser';
 
 export const deleteParticipageDrink = async (
   req: Request & { customData: any },

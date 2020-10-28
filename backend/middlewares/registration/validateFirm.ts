@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { IUser } from '../../interfaces';
 import { User } from '../../models/registerUser';
 
 export const validateFirmInput = (
@@ -8,7 +9,7 @@ export const validateFirmInput = (
   res: Response,
   next: NextFunction
 ) => {
-  const { username, password, fullName }: User = req.body;
+  const { username, password, fullName }: IUser = req.body;
   if (
     !password ||
     !username ||

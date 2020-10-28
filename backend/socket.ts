@@ -30,6 +30,7 @@ export const addToken = async (
     console.log(validToken);
     currentConnections[params.accessToken] = connectToken;
   } catch {
+    delete currentConnections[params.accessToken];
     console.log("invalid token");
   }
 };

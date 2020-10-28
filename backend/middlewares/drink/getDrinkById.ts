@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { IUser } from '../../interfaces';
 import { Drink } from '../../models/drink';
-import { User } from '../../models/registerUser';
 
 export const getDrinkbyId = async (
   req: Request & { customData: any },
@@ -15,7 +15,7 @@ export const getDrinkbyId = async (
       const sendBack = {
         ...x.toObject(),
         participants: [
-          ...(x.toObject().participants as (User & {
+          ...(x.toObject().participants as (IUser & {
             _id: string;
           })[]).map((y) => ({ id: y._id, fullName: y.fullName })),
         ],
