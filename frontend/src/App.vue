@@ -8,11 +8,12 @@
             >
                 <md-icon>menu</md-icon>
             </md-button>
-
-            <md-button to="/registration" class="md-primary"
-                >Regisztráció</md-button
-            >
-            <md-button to="/login" class="md-primary">Bejelentkezés</md-button>
+            <div v-if="!isLoggedIn">
+                <md-button to="/registration" class="md-primary"
+                    >Regisztráció</md-button
+                >
+                <md-button to="/login" class="md-primary">Belépés</md-button>
+            </div>
         </md-toolbar>
         <div class="content">
             <router-view />
@@ -119,7 +120,7 @@ import Component from 'vue-class-component';
             return this.$store.dispatch('openSidebar');
         }
     },
-    created() {
+    mounted() {
         this.$store.subscribeAction({
             after: action => {
                 if (action.type === 'openSnackbar') {

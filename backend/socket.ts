@@ -54,6 +54,7 @@ export const addToken = async (jwtToken: string, socketId: string) => {
         socketId,
         username: decodedToken.username,
       };
+      console.log(currentConnections);
     } else {
       throw Error;
     }
@@ -66,7 +67,7 @@ export const addToken = async (jwtToken: string, socketId: string) => {
 export const deleteByJWTToken = (jwtToken: string) =>
   checkConnectionExist(jwtToken) && delete currentConnections[jwtToken];
 
-export const deleteBySocketIo = (socketId: string) => {
+export const deleteBySocketId = (socketId: string) => {
   let index: number;
   Object.values(currentConnections).forEach((x, i) => {
     if (x.socketId === socketId) {
