@@ -1,31 +1,30 @@
 <div>
-    <md-table md-card v-model="drinkList">
+    <md-table md-card>
         <md-table-toolbar>
             <h1 class="md-title">Italok</h1>
         </md-table-toolbar>
 
-        <md-table-row slot="md-table-row" slot-scope="{ item }">
-            <md-table-cell md-label="Id" md-sort-by="id" md-numeric
-                >{{ item.id }}</md-table-cell
-            >
-            <md-table-cell md-label="Név" md-sort-by="drinkName"
-                >{{ item.drinkName }}</md-table-cell
-            >
-            <md-table-cell md-label="Ár" md-sort-by="price"
-                >{{ item.price }}</md-table-cell
-            >
-            <md-table-cell md-label="Eladó" md-sort-by="provider"
-                >{{ item.provider }}</md-table-cell
-            >
-            <md-table-cell md-label="Műveletek" md-sort-by="operations">
-                <md-button
-                    v-permission="'Member'"
-                    @click="buy(item.id)"
+        <md-table-row>
+            <md-table-head>Id</md-table-head>
+            <md-table-head>Név</md-table-head>
+            <md-table-head>Ár</md-table-head>
+            <md-table-head>Eladó</md-table-head>
+            <md-table-head v-permission="'Member'">Műveletek</md-table-head>
+        </md-table-row>
+
+        <md-table-row v-for="drink in drinkList" :key="drink.Id">
+            <md-table-cell>{{ drink.id }}</md-table-cell>
+            <md-table-cell>{{ drink.drinkName }}</md-table-cell>
+            <md-table-cell>{{ drink.price }}</md-table-cell>
+            <md-table-cell>{{ drink.provider }}</md-table-cell>
+            <md-table-cell v-permission="'Member'"
+                ><md-button
+                    @click="buy(drink.id)"
                     class="md-icon-button md-primary"
                 >
                     <md-icon>add</md-icon>
-                </md-button></md-table-cell
-            >
+                </md-button>
+            </md-table-cell>
         </md-table-row>
     </md-table>
 </div>
