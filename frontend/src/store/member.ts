@@ -9,14 +9,14 @@ export interface MemberState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
-
+export const memberInitialState: MemberState = {
+    request: { name: '', password: '' },
+    response: {},
+    error: '',
+    params: { isRequesting: false, isError: false }
+};
 export const member: Module<MemberState, State> = {
-    state: {
-        request: { name: '', password: '' },
-        response: {},
-        error: '',
-        params: { isRequesting: false, isError: false }
-    },
+    state: memberInitialState,
     mutations: {
         setMemberRequest(state, payload) {
             state.request = payload;

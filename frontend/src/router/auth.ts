@@ -64,6 +64,14 @@ export const authRoutesRoutes: Array<RouteConfig> = [
                             import(
                                 '../views/Auth/Drinks/DrinkList/DrinkList.vue'
                             )
+                    },
+                    {
+                        path: 'current',
+                        name: 'Mostani italok',
+                        component: () =>
+                            import(
+                                '../views/Auth/Drinks/CurrentDrinks/CurrentDrinks.vue'
+                            )
                     }
                 ]
             }

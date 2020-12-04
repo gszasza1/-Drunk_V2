@@ -11,14 +11,14 @@ export interface NewDrinkState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
-
+export const newDrinkInitialState: NewDrinkState = {
+    request: { drinkName: '', price: 0 },
+    response: {},
+    error: '',
+    params: { isRequesting: false, isError: false }
+};
 export const newDrink: Module<NewDrinkState, State> = {
-    state: {
-        request: { drinkName: '', price: 0 },
-        response: {},
-        error: '',
-        params: { isRequesting: false, isError: false }
-    },
+    state: newDrinkInitialState,
     mutations: {
         setNewDrinkRequest(state, payload) {
             state.request = payload;

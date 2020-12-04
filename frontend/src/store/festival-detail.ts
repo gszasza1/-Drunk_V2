@@ -16,14 +16,14 @@ export interface FestivalDetailState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
-
+export const festivalDetailInitialState: FestivalDetailState = {
+    request: {},
+    response: [],
+    error: '',
+    params: { isRequesting: false, isError: false }
+};
 export const festivalDetail: Module<FestivalDetailState, State> = {
-    state: {
-        request: {},
-        response: [],
-        error: '',
-        params: { isRequesting: false, isError: false }
-    },
+    state: festivalDetailInitialState,
     mutations: {
         setFestivalDetailRequest(state, payload) {
             state.request = payload;

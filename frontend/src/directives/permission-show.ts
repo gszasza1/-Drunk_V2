@@ -4,7 +4,6 @@ import Vue, { DirectiveOptions } from 'vue';
 import { DirectiveBinding } from 'vue/types/options';
 
 const removeDirective = function(el: HTMLElement, binding: DirectiveBinding) {
-    console.log(binding.value);
     if (binding.value !== undefined || binding.value !== null) {
         if (
             isNaN(+binding.value) === false &&
@@ -37,7 +36,6 @@ export const PermissionShowDirective: DirectiveOptions = {
         store.subscribeAction({
             after: action => {
                 if (action.type === 'setIsLoggedInResponse') {
-                    console.log(store.getters.userType, binding.value);
                     removeDirective(el, binding);
                 }
             }

@@ -79,4 +79,4 @@ export const deleteBySocketId = (socketId: string) => {
 };
 
 export const hardResetConnectionStore = () => (currentConnections = {});
-export const divideToken = (token: string) => token.split(" ")[1];
+export const divideToken = (token: string) => token && token.split(" ")[1];

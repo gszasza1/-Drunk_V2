@@ -1,13 +1,14 @@
 <template>
     <div id="app">
         <md-toolbar md-elevation="0">
-            <md-button
-                class="md-icon-button"
-                v-if="isLoggedIn"
-                @click="openSidebar()"
-            >
-                <md-icon>menu</md-icon>
-            </md-button>
+            <div v-if="isLoggedIn">
+                <md-button class="md-icon-button" @click="openSidebar()">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <md-button @click="logout()" class="md-primary"
+                    >Kijelentkezés</md-button
+                >
+            </div>
             <div v-if="!isLoggedIn">
                 <md-button to="/registration" class="md-primary"
                     >Regisztráció</md-button
@@ -76,6 +77,14 @@
                         >Új ital</router-link
                     >
                 </md-list-item>
+                <md-list-item v-permission="'Firm'">
+                    <md-icon>perm_scan_wifi</md-icon>
+                    <router-link
+                        to="/auth/drinks/current"
+                        class="md-list-item-text"
+                        >Beérkezett italok</router-link
+                    >
+                </md-list-item>
             </md-list>
         </md-drawer>
     </div>
@@ -102,7 +111,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
-
 @Component({
     name: 'App',
     data: () => ({
@@ -110,6 +118,11 @@ import Component from 'vue-class-component';
         sidebarOpen: false
     }),
     methods: {
+        logout() {
+            this.$store.dispatch('reset');
+            localStorage.clear();
+            this.$router.push('/');
+        },
         onScnackbarClose() {
             return this.$store.dispatch('closedSnackbar');
         },
@@ -134,6 +147,12 @@ import Component from 'vue-class-component';
                 }
             }
         });
+        if (
+            localStorage.getItem('accessToken') &&
+            localStorage.getItem('refreshToken')
+        ) {
+            this.$store.dispatch('stillLoggedIn');
+        }
     },
     computed: {
         getSnackbarError() {

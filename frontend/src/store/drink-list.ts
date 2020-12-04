@@ -16,14 +16,14 @@ export interface DrinkListState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
-
+export const drinkListInitialState: DrinkListState = {
+    request: {},
+    response: [],
+    error: '',
+    params: { isRequesting: false, isError: false }
+};
 export const drinkList: Module<DrinkListState, State> = {
-    state: {
-        request: {},
-        response: [],
-        error: '',
-        params: { isRequesting: false, isError: false }
-    },
+    state: drinkListInitialState,
     mutations: {
         setDrinkListRequest(state, payload) {
             state.request = payload;

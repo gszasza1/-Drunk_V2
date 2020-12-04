@@ -9,14 +9,14 @@ export interface FirmState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
-
+export const firmInitialState: FirmState = {
+    request: { name: '', password: '' },
+    response: {},
+    error: '',
+    params: { isRequesting: false, isError: false }
+};
 export const firm: Module<FirmState, State> = {
-    state: {
-        request: { name: '', password: '' },
-        response: {},
-        error: '',
-        params: { isRequesting: false, isError: false }
-    },
+    state: firmInitialState,
     mutations: {
         setFirmRequest(state, payload) {
             state.request = payload;

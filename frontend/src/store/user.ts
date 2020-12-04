@@ -13,13 +13,15 @@ export interface UserState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
+export const userInitialState: UserState = {
+    error: '',
+    params: { isError: false, isRequesting: false },
+    response: { type: 0, username: '', fullName: '', createdAt: null }
+};
 
 export const user: Module<UserState, State> = {
-    state: {
-        error: '',
-        params: { isError: false, isRequesting: false },
-        response: { type: 0, username: '', fullName: '', createdAt: null }
-    },
+    state: userInitialState,
+
     mutations: {
         getUserInformationRequest(state) {
             state.params = { isError: false, isRequesting: true };

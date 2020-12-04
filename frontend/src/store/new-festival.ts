@@ -10,14 +10,14 @@ export interface NewFestivalState {
     error: string;
     params: { isRequesting: boolean; isError: boolean };
 }
-
+export const newFestivalInitialState: NewFestivalState = {
+    request: { festivalName: '', place: '', time: undefined, ticket: [] },
+    response: {},
+    error: '',
+    params: { isRequesting: false, isError: false }
+};
 export const newFestival: Module<NewFestivalState, State> = {
-    state: {
-        request: { festivalName: '', place: '', time: undefined, ticket: [] },
-        response: {},
-        error: '',
-        params: { isRequesting: false, isError: false }
-    },
+    state: newFestivalInitialState,
     mutations: {
         setNewFestivalRequest(state, payload) {
             state.request = payload;

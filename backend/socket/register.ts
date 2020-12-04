@@ -5,7 +5,7 @@ import { allSocketId } from './allSocketId';
 
 export const register = (socket: Socket) => {
   socket.on(allSocketId.DEFINE_ID, (localSocket) => {
-    if (socket) {
+    if (socket && localSocket.accessToken) {
       console.log("created");
       addToken(divideToken(localSocket.accessToken), socket.id);
     }

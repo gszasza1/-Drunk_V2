@@ -1,25 +1,23 @@
 <div>
-    <md-table md-card v-if="drinkList">
+    <md-table md-card v-if="currentDrinks">
         <md-table-toolbar>
-            <h1 class="md-title">Italok</h1>
+            <h1 class="md-title">Rendelések</h1>
         </md-table-toolbar>
 
         <md-table-row>
             <md-table-head>Id</md-table-head>
             <md-table-head>Név</md-table-head>
             <md-table-head>Ár</md-table-head>
-            <md-table-head>Eladó</md-table-head>
             <md-table-head v-permission="'Member'">Műveletek</md-table-head>
         </md-table-row>
 
-        <md-table-row v-for="drink in drinkList" :key="drink.Id">
+        <md-table-row v-for="drink in currentDrinks" :key="drink.Id">
             <md-table-cell>{{ drink.id }}</md-table-cell>
             <md-table-cell>{{ drink.drinkName }}</md-table-cell>
-            <md-table-cell>{{ drink.price }}</md-table-cell>
-            <md-table-cell>{{ drink.provider }}</md-table-cell>
-            <md-table-cell v-permission="'Member'"
+            <md-table-cell>{{ drink.number }}</md-table-cell>
+            <md-table-cell
                 ><md-button
-                    @click="buy(drink.id)"
+                    @click="give(drink.id)"
                     class="md-icon-button md-primary"
                 >
                     <md-icon>add</md-icon>

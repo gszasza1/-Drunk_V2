@@ -21,13 +21,14 @@ export interface LoginState {
     params: { isRequesting: boolean; isError: boolean; isRefreshing: boolean };
     refreshingCall?: Promise<boolean>;
 }
+export const loginInitialState: LoginState = {
+    response: {},
+    error: '',
+    params: { isRequesting: false, isError: false, isRefreshing: false }
+};
 
 export const login: Module<LoginState, State> = {
-    state: {
-        response: {},
-        error: '',
-        params: { isRequesting: false, isError: false, isRefreshing: false }
-    },
+    state: loginInitialState,
     mutations: {
         setLoginRequest(state) {
             state.params.isRequesting = true;

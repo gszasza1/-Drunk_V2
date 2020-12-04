@@ -9,11 +9,12 @@ export interface SnackbarState {
 export interface ErrorResponse {
     error?: string;
 }
+export const snackbarInitialState: SnackbarState = {
+    error: '',
+    sidebarOpen: false
+};
 export const snackbar: Module<SnackbarState, State> = {
-    state: {
-        error: '',
-        sidebarOpen: false
-    },
+    state: snackbarInitialState,
     mutations: {
         openSidebar(state) {
             state.sidebarOpen = true;

@@ -29,7 +29,7 @@ import Component from 'vue-class-component';
                     });
 
                     this.$data.socket.on(allSocketId.ALCOHOL_BOUGHT, x => {
-                        alert(JSON.stringify(x));
+                        this.$store.dispatch('addDrinks', x);
                     });
                 }
 
