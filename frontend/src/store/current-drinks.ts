@@ -65,10 +65,17 @@ export const currentDrinks: Module<CurrentDrinksState, State> = {
                 });
         },
         async giveDrink(state, payload) {
-            Axios.post('/auth/drink/givedrink', {
-                number: 1,
-                drinkId: payload
-            })
+            Axios.delete('/auth/current-drink/' + payload)
+                .then(response => {
+                    state.dispatch('getCurrentDrink');
+                })
+                .catch(error => {
+                    state.commit('setCurrentDrinksError', error);
+                });
+        },
+
+        async getCurrentDrink(state) {
+            Axios.get('/auth/current-drink')
                 .then(response => {
                     state.commit('setCurrentDrinksResponse', response.data);
                 })

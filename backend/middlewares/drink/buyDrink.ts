@@ -23,15 +23,12 @@ export const buyDrink = async (
     return BuyDrink.create({ ...req.body, buyer: creator._id })
       .then((x) => x.toObject())
       .then(async (x: IBuyDrinkSchema) => {
-        console.log(1);
         const providerDrink = (await (
           await Drink.findById(x.drinkId).populate("provider").exec()
         ).toObject()) as IDrinkPopulated;
-        console.log(2);
         const socketIds = getSocketIdsByUserName(
           providerDrink.provider.username
         );
-        console.log(3);
         socketIds.forEach((socketId) => {
           webSocket.to(socketId).emit(allSocketId.ALCOHOL_BOUGHT, {
             id: x._id,
@@ -39,7 +36,6 @@ export const buyDrink = async (
             number: x.number,
           });
         });
-        console.log(4);
         res.status(StatusCodes.OK).send("Sikeres felvétel");
       })
       .catch((x) => {

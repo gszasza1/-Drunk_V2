@@ -25,7 +25,7 @@ export const refreshToken = (
           { username: user.username, type: user.type },
           secret.secret,
           {
-            expiresIn: "30s",
+            expiresIn: "900s",
           }
         );
         const refreshToken = jwt.sign(

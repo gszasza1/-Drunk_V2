@@ -20,7 +20,7 @@ export const createJwt = (req: Request, res: Response, next: NextFunction) => {
             { username: user.username, type: user.type },
             secret.secret,
             {
-              expiresIn: "600s",
+              expiresIn: "900s",
             }
           );
           const refreshToken = jwt.sign(
